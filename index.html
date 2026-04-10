@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Mighty Teck LLC | Digital Empires</title>
+    
+    <!-- Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap');
+        
+        :root {
+            --diamond: #e0f2fe;
+            --platinum: #e5e7eb;
+            --gold: #d4af37;
+            --emerald: #10b981;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #000;
+            color: #ffffff;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .heading-font { font-family: 'Syncopate', sans-serif; }
+
+        /* Cinematic Overlays */
+        #global-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        #cursor-glow {
+            position: fixed;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+            filter: blur(60px);
+        }
+
+        /* Scroll Engine */
+        #intro-trigger { height: 150vh; position: relative; z-index: 5; }
+        .scroll-content-wrapper { position: relative; z-index: 10; }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 6rem 1.5rem;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @media (min-width: 768px) {
+            section { padding: 8rem 2rem; }
+        }
+
+        section.visible { opacity: 1; transform: translateY(0); }
+
+        #globe-branding {
+            position: fixed;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            text-align: center;
+            pointer-events: none;
+            width: 90%;
+        }
+
+        /* Cards & Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            border-radius: 2rem;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-8px);
+        }
+
+        /* 3D Glow Buttons */
+        .btn-glow {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .btn-glow { padding: 1.2rem 2.5rem; font-size: 0.75rem; letter-spacing: 0.3em; }
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px currentColor;
+            border-color: currentColor;
+        }
+
+        .btn-diamond { color: var(--diamond); }
+        .btn-gold { color: var(--gold); }
+        .btn-platinum { color: var(--platinum); }
+
+        /* Typography */
+        .text-huge { font-size: clamp(2.5rem, 8vw, 6.5rem); line-height: 1; letter-spacing: -0.05em; }
+        .text-gold { color: var(--gold); }
+        
+        .caption-tag {
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .caption-tag::before { content: ''; width: 25px; height: 1px; background: currentColor; }
+
+        .caption-tag.no-line::before { display: none; }
+
+        .glow-hover {
+            transition: text-shadow 0.4s ease, color 0.4s ease;
+        }
+        .glow-hover:hover {
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .powerful-caption {
+            font-size: clamp(1.6rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        #scroll-hint {
+            position: fixed;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            font-size: 8px;
+            letter-spacing: 1em;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-align: center;
+        }
+        
+        .hero-power-caption {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--gold);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-top: 1.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="global-canvas"></canvas>
+    <div id="cursor-glow"></div>
+
+    <div id="globe-branding" class="opacity-0">
+        <h2 class="heading-font text-xl md:text-3xl font-bold tracking-[1em] md:tracking-[1.5em] text-white/40 mb-2">MIGHTY</h2>
+        <h1 class="heading-font text-5xl md:text-8xl font-black tracking-[0.2em] md:tracking-[0.5em] text-gold">TECK</h1>
+        <p class="heading-font text-[9px] md:text-[11px] tracking-[0.6em] md:tracking-[0.9em] text-white/70 mt-6 uppercase">Engineering Global Digital Supremacy</p>
+    </div>
+
+    <div id="scroll-hint">
+        <div class="w-10 h-[1px] bg-gold/30 mx-auto overflow-hidden">
+            <div class="w-full h-full bg-gold animate-pulse"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="main-nav" class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/60 backdrop-blur-2xl opacity-0 translate-y-[-100%] transition-all duration-1000">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5 flex justify-between items-center">
+            <div class="heading-font text-[10px] font-bold tracking-tighter text-gold">MIGHTY TECK <span class="text-white/20 ml-1 hidden sm:inline">LLC</span></div>
+            <div class="hidden lg:flex gap-10">
+                <a href="#services" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-gold transition-colors">Logistics</a>
+                <a href="#pricing" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-gold transition-colors">Capital</a>
+                <a href="#performance" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-gold transition-colors">Performance</a>
+                <a href="#about" class="text-[9px] font-black uppercase tracking-widest text-white/50 hover:text-gold transition-colors">Director</a>
+            </div>
+            <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-platinum px-5 py-2 md:px-6 md:py-3">Connect</a>
+        </div>
+    </nav>
+
+    <div id="intro-trigger"></div>
+
+    <div class="scroll-content-wrapper">
+        
+        <!-- HERO -->
+        <section id="home" class="content-section">
+            <div class="max-w-7xl mx-auto w-full">
+                <span class="caption-tag text-diamond">Global Strategy Entity</span>
+                <h1 class="heading-font text-huge font-black mb-6 glow-hover">
+                    DOMINATE<br>
+                    <span class="text-gold">THE DIGITAL</span><br>
+                    <span class="text-white">ECONOMY</span>
+                </h1>
+                
+                <div class="hero-power-caption mb-10 md:mb-12 glow-hover">Where technological precision meets institutional growth.</div>
+                
+                <p class="text-lg md:text-2xl font-light text-white/70 mb-10 md:mb-12 max-w-3xl leading-relaxed italic border-l-2 border-gold pl-6 md:pl-10 glow-hover">
+                    "We don't just build websites; we engineer <span class="text-white font-bold">digital empires</span> for the global elite. Deploying high-yield digital assets across all borders."
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 md:gap-6">
+                    <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold">Secure Your Territory</a>
+                    <a href="tel:6032330590" class="btn-glow btn-platinum">603-233-0590</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" class="content-section">
+            <div class="max-w-7xl mx-auto w-full">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                    <div>
+                        <span class="caption-tag text-platinum">Engineering Excellence</span>
+                        <h2 class="powerful-caption glow-hover">WE DON'T JUST BUILD WEBSITES; WE ENGINEER <span class="text-platinum">UNSTOPPABLE ENGINES.</span></h2>
+                        <p class="text-gray-400 text-base md:text-lg leading-relaxed mb-10 glow-hover">
+                            Legacy infrastructure is the enemy of growth. We strip away inefficiencies and replace them with high-performance digital engines calibrated for speed and global scale.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6 md:gap-8 mb-10">
+                            <div class="border-t border-white/10 pt-4">
+                                <h4 class="text-white font-bold text-base md:text-lg mb-1 glow-hover">Web Logistics</h4>
+                                <p class="text-[9px] md:text-[10px] text-gray-500 uppercase tracking-widest">React & Angular Expert</p>
+                            </div>
+                            <div class="border-t border-white/10 pt-4">
+                                <h4 class="text-white font-bold text-base md:text-lg mb-1 glow-hover">UI Systems</h4>
+                                <p class="text-[9px] md:text-[10px] text-gray-500 uppercase tracking-widest">Cinematic Interaction</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-8 md:p-12 border-platinum/20">
+                         <h4 class="text-platinum font-black text-xs md:text-sm uppercase mb-4 tracking-widest glow-hover">The Work:</h4>
+                         <p class="text-white/70 text-sm md:text-base leading-relaxed mb-8 glow-hover">Our portfolio consists of high-traffic infrastructures that maintain 99.9% uptime while delivering 40% faster load speeds.</p>
+                        <div class="flex items-center gap-4">
+                            <i data-lucide="zap" class="text-platinum w-6 h-6"></i>
+                            <span class="text-[10px] md:text-[11px] font-bold tracking-[0.3em] uppercase glow-hover">Engineered for Velocity</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING -->
+        <section id="pricing" class="content-section">
+            <div class="max-w-7xl mx-auto w-full">
+                <div class="text-center mb-16 md:mb-20">
+                    <span class="caption-tag text-diamond justify-center">Capital Allocation</span>
+                    <h2 class="powerful-caption mx-auto max-w-4xl glow-hover">PREMIUM ASSETS FOR <span class="text-diamond">VISIONARY LEADERS.</span></h2>
+                </div>
+                <div class="grid lg:grid-cols-3 gap-8 md:gap-10">
+                    <div class="glass-card p-8 md:p-12 flex flex-col items-center text-center">
+                        <h3 class="heading-font text-[10px] md:text-[11px] font-bold mb-6 text-gray-500 glow-hover">FOUNDATION</h3>
+                        <div class="text-5xl md:text-6xl font-black mb-10 text-diamond glow-hover">$500</div>
+                        <ul class="space-y-5 text-[10px] md:text-xs text-gray-300 mb-10 flex-grow uppercase tracking-widest glow-hover">
+                            <li>&bull; Performance UI</li>
+                            <li>&bull; SEO Core</li>
+                            <li>&bull; 5 Pages</li>
+                        </ul>
+                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-diamond w-full">Inquire</a>
+                    </div>
+                    <div class="glass-card p-8 md:p-12 bg-white/[0.04] border-gold/40 scale-100 lg:scale-105 relative flex flex-col items-center text-center z-10 shadow-[0_0_50px_rgba(212,175,55,0.1)]">
+                        <div class="absolute -top-4 bg-gold text-black text-[9px] font-black uppercase tracking-widest px-4 py-1 rounded-full">Most Deployed</div>
+                        <h3 class="heading-font text-[10px] md:text-[11px] font-bold mb-6 text-gold glow-hover">SOVEREIGN EXPANSION</h3>
+                        <div class="text-5xl md:text-6xl font-black mb-10 text-gold glow-hover">$700</div>
+                        <ul class="space-y-5 text-[10px] md:text-xs text-white mb-10 flex-grow uppercase tracking-widest glow-hover">
+                            <li>&bull; Full Eco-System</li>
+                            <li>&bull; Social Media Domination</li>
+                            <li>&bull; 10 Strategic Entities</li>
+                        </ul>
+                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold w-full text-black bg-gold hover:bg-transparent hover:text-gold border-gold">Acquire</a>
+                    </div>
+                    <div class="glass-card p-8 md:p-12 flex flex-col items-center text-center">
+                        <h3 class="heading-font text-[10px] md:text-[11px] font-bold mb-6 text-gray-500 glow-hover">GLOBAL EMPIRE</h3>
+                        <div class="text-5xl md:text-6xl font-black mb-10 text-white glow-hover">$1200</div>
+                        <ul class="space-y-5 text-[10px] md:text-xs text-gray-300 mb-10 flex-grow uppercase tracking-widest glow-hover">
+                            <li>&bull; VIP Concierge</li>
+                            <li>&bull; Custom API</li>
+                            <li>&bull; Unlimited Scale</li>
+                        </ul>
+                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-platinum w-full">Secure</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MULTIDIMENSIONAL PERFORMANCE -->
+        <section id="performance" class="content-section bg-gradient-to-b from-transparent via-emerald-950/10 to-transparent">
+            <div class="max-w-7xl mx-auto w-full">
+                <div class="text-left md:text-center mb-12 md:mb-20">
+                    <span class="caption-tag no-line text-emerald md:justify-center">Multidimensional Performance</span>
+                    <h2 class="powerful-caption mx-auto max-w-5xl glow-hover">BEYOND CODE: WE MASTER THE <span class="text-emerald">PHYSICAL & DIGITAL</span> MEDIUMS.</h2>
+                    <p class="text-gray-400 uppercase tracking-widest text-xs max-w-2xl md:mx-auto mt-4 leading-relaxed glow-hover">Capturing the essence of high-value brands through advanced visual engineering.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    <!-- Cards are now larger with more padding and bigger text -->
+                    <div class="glass-card p-8 md:p-10 hover:bg-emerald/10 transition-all border border-white/5 hover:border-emerald/40 group">
+                        <div class="mb-6 text-emerald group-hover:scale-110 transition-transform origin-left"><i data-lucide="camera" class="w-8 h-8"></i></div>
+                        <h3 class="heading-font text-base md:text-lg font-bold mb-4 text-emerald glow-hover">Drone Photography</h3>
+                        <p class="text-sm md:text-base text-gray-300 leading-relaxed font-light glow-hover">"Ascend above the competition. We deliver high-altitude perspectives that showcase the true scale of your enterprise assets."</p>
+                    </div>
+                    <div class="glass-card p-8 md:p-10 hover:bg-emerald/10 transition-all border border-white/5 hover:border-emerald/40 group">
+                        <div class="mb-6 text-emerald group-hover:scale-110 transition-transform origin-left"><i data-lucide="video" class="w-8 h-8"></i></div>
+                        <h3 class="heading-font text-base md:text-lg font-bold mb-4 text-emerald glow-hover">Videography</h3>
+                        <p class="text-sm md:text-base text-gray-300 leading-relaxed font-light glow-hover">"Visual storytelling engineered to convert. We capture motion that moves the needle on your brand's market valuation."</p>
+                    </div>
+                    <div class="glass-card p-8 md:p-10 hover:bg-emerald/10 transition-all border border-white/5 hover:border-emerald/40 group">
+                        <div class="mb-6 text-emerald group-hover:scale-110 transition-transform origin-left"><i data-lucide="scissors" class="w-8 h-8"></i></div>
+                        <h3 class="heading-font text-base md:text-lg font-bold mb-4 text-emerald glow-hover">Video Editing</h3>
+                        <p class="text-sm md:text-base text-gray-300 leading-relaxed font-light glow-hover">"The art of precision. We refine raw data into cinematic narratives, ensuring every frame serves a strategic business purpose."</p>
+                    </div>
+                    <div class="glass-card p-8 md:p-10 hover:bg-emerald/10 transition-all border border-white/5 hover:border-emerald/40 group">
+                        <div class="mb-6 text-emerald group-hover:scale-110 transition-transform origin-left"><i data-lucide="aperture" class="w-8 h-8"></i></div>
+                        <h3 class="heading-font text-base md:text-lg font-bold mb-4 text-emerald glow-hover">Cinematography</h3>
+                        <p class="text-sm md:text-base text-gray-300 leading-relaxed font-light glow-hover">"Bespoke visual excellence. Lighting, composition, and direction designed to place your brand directly in the premium category."</p>
+                    </div>
+                    <div class="glass-card p-8 md:p-10 hover:bg-emerald/10 transition-all border border-white/5 hover:border-emerald/40 group">
+                        <div class="mb-6 text-emerald group-hover:scale-110 transition-transform origin-left"><i data-lucide="cpu" class="w-8 h-8"></i></div>
+                        <h3 class="heading-font text-base md:text-lg font-bold mb-4 text-emerald glow-hover">Quadcopter R&D</h3>
+                        <p class="text-sm md:text-base text-gray-300 leading-relaxed font-light glow-hover">"Technical engineering at its peak. Researching advanced ArduPilot systems to redefine what's possible in autonomous flight."</p>
+                    </div>
+                    <div class="glass-card p-8 md:p-10 hover:bg-emerald/10 transition-all border border-white/5 hover:border-emerald/40 group">
+                        <div class="mb-6 text-emerald group-hover:scale-110 transition-transform origin-left"><i data-lucide="mic" class="w-8 h-8"></i></div>
+                        <h3 class="heading-font text-base md:text-lg font-bold mb-4 text-emerald glow-hover">Audio Production</h3>
+                        <p class="text-sm md:text-base text-gray-300 leading-relaxed font-light glow-hover">"Soundscapes that command attention. Precise audio engineering for commercials, podcasts, and corporate identity."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIRECTOR / GLOBAL VISION -->
+        <section id="about" class="content-section">
+            <div class="max-w-7xl mx-auto w-full">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                    <div class="glass-card p-10 md:p-16 text-center border-gold/30 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-b from-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                        <h3 class="heading-font text-2xl md:text-3xl font-black mb-4 relative z-10 glow-hover">SANJAY KATHULA</h3>
+                        <p class="text-gold font-black tracking-[0.4em] uppercase text-[10px] md:text-[11px] mb-6 relative z-10 glow-hover">Director & CEO</p>
+                        <p class="text-white text-[11px] md:text-xs font-bold uppercase tracking-widest mb-8 relative z-10 bg-white/5 inline-block px-4 py-2 rounded-lg glow-hover">MS in Computer Science</p>
+                        <div class="flex justify-center gap-8 mb-10 text-gold relative z-10">
+                            <i data-lucide="shield-check" class="w-6 h-6"></i>
+                            <i data-lucide="code-2" class="w-6 h-6"></i>
+                            <i data-lucide="globe" class="w-6 h-6"></i>
+                        </div>
+                        <a href="mailto:sanjaykathulamusic@gmail.com" class="text-white/60 text-[10px] md:text-xs uppercase tracking-widest block mb-4 hover:text-gold transition-colors relative z-10 glow-hover">sanjaykathulamusic@gmail.com</a>
+                        <a href="tel:6032330590" class="text-gold text-xl md:text-2xl font-black tracking-widest block relative z-10 glow-hover">603-233-0590</a>
+                    </div>
+                    <div>
+                        <span class="caption-tag text-gold">GLOBAL VISION</span>
+                        <h2 class="powerful-caption glow-hover">BRIDGING CONTINENTS THROUGH <span class="text-gold">ENGINEERING.</span></h2>
+                        <p class="text-gray-400 text-base md:text-lg leading-relaxed mb-10 glow-hover">
+                            From the financial hubs of the USA to the tech-driven markets of India, we lead expansion with scientific rigor. Our director-led approach ensures that your brand achieves global relevance through absolute technical dominance.
+                        </p>
+                        <!-- Updated Button with Email -->
+                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold inline-block">Strategic Consultation</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-12 md:py-20 border-t border-white/5 relative z-10 mt-20">
+            <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="heading-font text-[12px] font-bold text-gold tracking-[0.4em]">MIGHTY TECK</div>
+                <div class="flex gap-10 text-gray-500">
+                    <a href="mailto:sanjaykathulamusic@gmail.com" class="hover:text-gold transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>
+                    <a href="tel:6032330590" class="hover:text-gold transition-colors"><i data-lucide="phone" class="w-5 h-5"></i></a>
+                </div>
+                <p class="text-[8px] md:text-[9px] tracking-[0.8em] text-gray-600 uppercase text-center">USA &bull; INDIA &bull; GLOBAL EXPANSION &bull; 2024</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        const canvas = document.getElementById('global-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 4000);
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const celestialGroup = new THREE.Group();
+        scene.add(celestialGroup);
+
+        // --- REALISTIC DAY/NIGHT EARTH ENGINE ---
+        const globeGroup = new THREE.Group();
+        celestialGroup.add(globeGroup);
+        const globeGeo = new THREE.SphereGeometry(20, 64, 64);
+        
+        // 1. Procedural Day Canvas (Oceans & Continents)
+        const dayCanvas = document.createElement('canvas');
+        dayCanvas.width = 1024; dayCanvas.height = 512;
+        const dCtx = dayCanvas.getContext('2d');
+        
+        // Deep Ocean Gradient
+        const dGrad = dCtx.createLinearGradient(0,0,0,512);
+        dGrad.addColorStop(0, '#020b17');
+        dGrad.addColorStop(0.5, '#072e5c');
+        dGrad.addColorStop(1, '#020b17');
+        dCtx.fillStyle = dGrad;
+        dCtx.fillRect(0,0,1024,512);
+
+        // Generate Continents Data array so day/night match exactly
+        const continents = [];
+        for(let i=0; i<80; i++) {
+            let y = 80 + Math.random()*352;
+            if(Math.random() < Math.sin(y/512 * Math.PI)) { // More land near equator
+                continents.push({ 
+                    x: Math.random()*1024, 
+                    y: y, 
+                    rx: Math.random()*70 + 20, 
+                    ry: Math.random()*30 + 10,
+                    rot: Math.random()*Math.PI
+                });
+            }
+        }
+
+        // Draw Day Continents
+        continents.forEach(c => {
+            dCtx.fillStyle = '#0f2916'; // Dark organic green
+            dCtx.beginPath(); dCtx.ellipse(c.x, c.y, c.rx, c.ry, c.rot, 0, Math.PI*2); dCtx.fill();
+            dCtx.fillStyle = '#163d21'; // Lighter forest green center
+            dCtx.beginPath(); dCtx.ellipse(c.x, c.y, c.rx*0.7, c.ry*0.7, c.rot, 0, Math.PI*2); dCtx.fill();
+        });
+
+        // 2. Procedural Night Canvas (Darkness & City Lights)
+        const nightCanvas = document.createElement('canvas');
+        nightCanvas.width = 1024; nightCanvas.height = 512;
+        const nCtx = nightCanvas.getContext('2d');
+        nCtx.fillStyle = '#000103'; // Pure dark ocean
+        nCtx.fillRect(0,0,1024,512);
+
+        continents.forEach(c => {
+            nCtx.fillStyle = '#01050a'; // Barely visible night land
+            nCtx.beginPath(); nCtx.ellipse(c.x, c.y, c.rx, c.ry, c.rot, 0, Math.PI*2); nCtx.fill();
+            
+            // Add City Lights exclusively to landmasses
+            if(Math.random() > 0.2) {
+                nCtx.fillStyle = '#ffdf70'; // Warm city glow
+                let numLights = Math.floor(Math.random() * 8);
+                for(let j=0; j<numLights; j++) {
+                    nCtx.globalAlpha = 0.3 + Math.random()*0.7; // Twinkle variance
+                    nCtx.beginPath();
+                    nCtx.arc(c.x + (Math.random()-0.5)*c.rx, c.y + (Math.random()-0.5)*c.ry, Math.random()*1.5, 0, Math.PI*2);
+                    nCtx.fill();
+                }
+                nCtx.globalAlpha = 1.0;
+            }
+        });
+
+        const dayTex = new THREE.CanvasTexture(dayCanvas);
+        const nightTex = new THREE.CanvasTexture(nightCanvas);
+
+        // 3. Custom Day/Night Shader Material
+        // Light direction relative to camera view space creates the perfect half-lit globe
+        const sunDir = new THREE.Vector3(1.0, 0.3, 1.0).normalize(); 
+        
+        const earthShaderMat = new THREE.ShaderMaterial({
+            uniforms: {
+                dayTexture: { value: dayTex },
+                nightTexture: { value: nightTex },
+                sunDirection: { value: sunDir }
+            },
+            vertexShader: `
+                varying vec2 vUv;
+                varying vec3 vNormal;
+                void main() {
+                    vUv = uv;
+                    // Transform normal to view space to interact perfectly with fixed sunDirection
+                    vNormal = normalize(normalMatrix * normal);
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                uniform sampler2D dayTexture;
+                uniform sampler2D nightTexture;
+                uniform vec3 sunDirection;
+                varying vec2 vUv;
+                varying vec3 vNormal;
+                void main() {
+                    // Calculate lighting intensity
+                    float intensity = dot(normalize(vNormal), normalize(sunDirection));
+                    // Smooth transition line between day and night
+                    float blend = smoothstep(-0.15, 0.15, intensity);
+                    
+                    vec4 day = texture2D(dayTexture, vUv);
+                    vec4 night = texture2D(nightTexture, vUv);
+                    
+                    // Final color mix based on lighting
+                    gl_FragColor = vec4(mix(night.rgb, day.rgb, blend), 1.0);
+                }
+            `
+        });
+        const globe = new THREE.Mesh(globeGeo, earthShaderMat);
+        globeGroup.add(globe);
+
+        // 4. Atmospheric Halo Shader (Fresnel)
+        const atmoMat = new THREE.ShaderMaterial({
+            uniforms: { sunDirection: { value: sunDir } },
+            vertexShader: `
+                varying vec3 vNormal;
+                void main() {
+                    vNormal = normalize(normalMatrix * normal);
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                uniform vec3 sunDirection;
+                varying vec3 vNormal;
+                void main() {
+                    float intensity = dot(normalize(vNormal), normalize(sunDirection));
+                    // Edge detection for halo
+                    float edge = 1.0 - max(0.0, dot(normalize(vNormal), vec3(0.0, 0.0, 1.0)));
+                    // Only show halo heavily on the lit side
+                    float glow = smoothstep(0.4, 1.0, edge) * smoothstep(-0.5, 0.5, intensity);
+                    gl_FragColor = vec4(0.2, 0.5, 1.0, glow * 0.8);
+                }
+            `,
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            side: THREE.BackSide
+        });
+        const atmosphere = new THREE.Mesh(new THREE.SphereGeometry(21.5, 64, 64), atmoMat);
+        globeGroup.add(atmosphere);
+
+
+        // --- SUPER BRIGHT STARS ---
+        const starCount = 8000; // Optimized count
+        const starPos = new Float32Array(starCount * 3);
+        for(let i=0; i < starCount; i++) {
+            starPos[i*3] = (Math.random() - 0.5) * 3000;
+            starPos[i*3+1] = (Math.random() - 0.5) * 3000;
+            starPos[i*3+2] = (Math.random() - 0.5) * 3000;
+        }
+        const starGeo = new THREE.BufferGeometry();
+        starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+        scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 2.5, transparent: true, opacity: 1.0, sizeAttenuation: true })));
+
+        // --- OPTIMIZED COMETS / SHOOTING STARS ---
+        const comets = [];
+        const cometGroup = new THREE.Group();
+        celestialGroup.add(cometGroup);
+        // Drastically reduced segment count and object count for perfect 60fps
+        const createComet = (i) => {
+            const geo = new THREE.BufferGeometry();
+            const posArr = new Float32Array(3 * 40); // Increased vertices for longer tail
+            geo.setAttribute('position', new THREE.BufferAttribute(posArr, 3));
+            const line = new THREE.Line(geo, new THREE.LineBasicMaterial({ color: i%2===0?0xffffff:0x88ccff, transparent: true, opacity: 1.0, linewidth: 3 }));
+            const state = { 
+                mesh: line, 
+                velocity: new THREE.Vector3(4 + Math.random()*5, (Math.random()-0.5)*0.3, 0), // Faster speed
+                life: 0, 
+                maxLife: 200+Math.random()*200, 
+                pos: new THREE.Vector3(-800-Math.random()*500, (Math.random()-0.5)*500, (Math.random()-0.5)*300) 
+            };
+            cometGroup.add(line); 
+            comets.push(state);
+        };
+        for(let i=0; i<20; i++) createComet(i); // Increased count slightly to 20
+
+        camera.position.z = 100;
+        let mouseX = 0, mouseY = 0;
+        
+        // Only run mouse effect if on desktop to save battery/perf on mobile
+        if(window.innerWidth > 768) {
+            window.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) - 0.5;
+                mouseY = (e.clientY / window.innerHeight) - 0.5;
+                gsap.to("#cursor-glow", { x: e.clientX, y: e.clientY, duration: 1.2 });
+            });
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.timeline({
+            scrollTrigger: { trigger: "#intro-trigger", start: "top top", end: "bottom center", scrub: 2.5, onUpdate: (self) => {
+                gsap.to("#scroll-hint", { opacity: self.progress > 0.1 ? 0 : 1 });
+                gsap.to("#globe-branding", { opacity: self.progress > 0.1 && self.progress < 0.9 ? 1 : 0, scale: 1 - self.progress * 0.45 });
+            }}
+        }).to(camera.position, { z: 10, ease: "power2.inOut" }).to("#main-nav", { opacity: 1, y: 0, duration: 1 }, 0.5);
+
+        document.querySelectorAll('.content-section').forEach(section => {
+            ScrollTrigger.create({ trigger: section, start: "top 85%", onEnter: () => section.classList.add('visible') });
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            // Globe Rotation - The shader automatically calculates sunrise/sunset as it turns!
+            globeGroup.rotation.y += 0.0015;
+            
+            // Highly optimized comet loop
+            comets.forEach((c) => {
+                c.pos.add(c.velocity); c.life++;
+                const p = c.mesh.geometry.attributes.position.array;
+                for(let i = p.length-1; i >= 3; i--) p[i] = p[i-3]; // Shift vertices
+                p[0] = c.pos.x; p[1] = c.pos.y; p[2] = c.pos.z;
+                c.mesh.geometry.attributes.position.needsUpdate = true;
+                
+                // Fade in/out
+                c.mesh.material.opacity = Math.sin((c.life/c.maxLife)*Math.PI) * 0.8;
+                
+                // Reset comet
+                if(c.life > c.maxLife || c.pos.x > 800) {
+                    c.life = 0; c.pos.x = -800-Math.random()*500;
+                }
+            });
+            
+            // Subtle camera parallax
+            camera.position.x += (mouseX * 15 - camera.position.x) * 0.02;
+            camera.position.y += (-mouseY * 15 - camera.position.y) * 0.02;
+            camera.lookAt(0,0,0);
+            
+            renderer.render(scene, camera);
+        }
+
+        window.onload = () => { animate(); lucide.createIcons(); };
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
