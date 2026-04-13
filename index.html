@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mighty Teck LLC | Galactic Digital Supremacy</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -26,6 +26,7 @@
             color: #ffffff;
             margin: 0;
             overflow-x: hidden;
+            width: 100%;
         }
 
         .heading-font { font-family: 'Syncopate', sans-serif; }
@@ -45,49 +46,49 @@
             display: flex;
             align-items: center;
             position: relative;
-            padding: 5rem 1.5rem;
+            padding: 4rem 1.5rem;
             z-index: 10;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-radius: 2rem;
-            padding: 2rem;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .pricing-card {
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-        
-        .glass-card:hover {
-            border-color: rgba(212, 175, 55, 0.4);
-            transform: translateY(-8px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 40px rgba(212, 175, 55, 0.1);
         }
 
         @media (min-width: 768px) {
-            .glass-card { padding: 3rem; }
+            .glass-card { padding: 3rem; border-radius: 2rem; }
             section { padding: 8rem 4rem; }
         }
 
-        .text-huge { font-size: clamp(3rem, 12vw, 8rem); line-height: 0.9; letter-spacing: -0.05em; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-        .text-gradient-gold { background: linear-gradient(135deg, #ffffff, #d4af37, #a68a2d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .text-huge { 
+            font-size: clamp(2.5rem, 10vw, 8rem); 
+            line-height: 1.1; 
+            letter-spacing: -0.05em; 
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8); 
+        }
+        
+        .text-gradient-gold { 
+            background: linear-gradient(135deg, #ffffff, #d4af37, #a68a2d); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
 
         .btn-glow {
-            padding: 1.25rem 2.5rem;
+            padding: 1rem 2rem;
             border-radius: 999px;
             text-transform: uppercase;
             font-weight: 800;
-            letter-spacing: 0.2em;
-            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            font-size: 0.75rem;
             transition: all 0.4s;
             border: 1px solid rgba(255,255,255,0.2);
             background: rgba(255,255,255,0.08);
@@ -96,150 +97,118 @@
             display: inline-block;
             box-shadow: 0 0 20px rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
+            text-align: center;
         }
 
-        .btn-glow:hover {
-            background: rgba(255,255,255,0.15);
-            border-color: rgba(255,255,255,0.4);
-        }
+        .btn-gold { background: var(--gold); color: black; border: none; }
+        .btn-gold:hover { transform: scale(1.05); filter: brightness(1.15); background: var(--gold); }
 
-        .btn-gold { background: var(--gold); color: black; border: none; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); }
-        .btn-gold:hover { transform: scale(1.05); filter: brightness(1.15); box-shadow: 0 10px 40px rgba(212, 175, 55, 0.5); background: var(--gold); border: none; }
-
-        .powerful-caption { font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 2rem; color: #fff; text-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+        .powerful-caption { font-size: clamp(1.75rem, 5vw, 4rem); font-weight: 800; line-height: 1.2; margin-bottom: 1.5rem; color: #fff; }
 
         .check-list li { 
             display: flex; 
             align-items: flex-start; 
-            gap: 1rem; 
-            font-size: 1.05rem; 
-            font-weight: 500;
+            gap: 0.75rem; 
+            font-size: 0.95rem; 
             color: rgba(255, 255, 255, 0.9); 
-            line-height: 1.6;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1rem;
         }
-        .check-icon { color: var(--gold); flex-shrink: 0; margin-top: 0.2rem; filter: drop-shadow(0 0 5px rgba(212,175,55,0.6)); width: 1.25rem; height: 1.25rem; }
+        .check-icon { color: var(--gold); flex-shrink: 0; margin-top: 0.2rem; }
 
         .service-tag {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 240, 255, 0.1);
             color: var(--cyan);
-            padding: 6px 14px;
-            border-radius: 6px;
+            padding: 4px 10px;
+            border-radius: 4px;
             font-size: 10px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            display: inline-block;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             border: 1px solid rgba(0, 240, 255, 0.2);
+            display: inline-block;
+            width: fit-content;
         }
-
-        .text-bright { color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 
         .content-layer {
             position: relative;
             z-index: 10;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #010103; }
-        ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.3); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.6); }
-
-        .director-glow {
-            position: absolute;
-            top: -20%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 0;
+            width: 100%;
         }
     </style>
 </head>
 <body>
 
-    <!-- 3D BACKGROUND ENGINE -->
     <canvas id="global-canvas"></canvas>
 
-    <!-- 3-PAGE ZOOM INTRO SEQUENCE -->
+    <!-- ORIGINAL INTRO SEQUENCE (Restored Values) -->
     <div id="intro-void" class="h-[500vh] relative z-20">
-        <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center pointer-events-none px-4">
+        <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center pointer-events-none px-4 text-center">
             <div class="overflow-hidden">
-                <h2 class="intro-text text-4xl md:text-6xl lg:text-8xl font-black heading-font text-white tracking-widest drop-shadow-2xl opacity-0 transform translate-y-20">PREPARE FOR</h2>
+                <h2 class="intro-text text-3xl md:text-6xl lg:text-8xl font-black heading-font text-white tracking-widest opacity-0 transform translate-y-20">PREPARE FOR</h2>
             </div>
-            <div class="overflow-hidden mt-2 md:mt-6">
-                <h2 class="intro-text text-4xl md:text-6xl lg:text-8xl font-black heading-font text-cyan-400 tracking-widest drop-shadow-[0_0_30px_rgba(0,240,255,0.5)] opacity-0 transform translate-y-20">SUPREMACY</h2>
+            <div class="overflow-hidden mt-6">
+                <h2 class="intro-text text-3xl md:text-6xl lg:text-8xl font-black heading-font text-cyan-400 tracking-widest opacity-0 transform translate-y-20">SUPREMACY</h2>
             </div>
             
             <div class="scroll-indicator absolute bottom-12 flex flex-col items-center gap-4 animate-bounce">
-                <span class="text-white/60 text-xs tracking-[0.3em] uppercase font-bold">Scroll to Penetrate Atmosphere</span>
-                <i data-lucide="chevrons-down" class="text-gold w-6 h-6"></i>
+                <span class="text-white/60 text-[10px] tracking-[0.3em] uppercase font-bold">Scroll to Penetrate</span>
+                <i data-lucide="chevrons-down" class="text-gold w-5 h-5"></i>
             </div>
         </div>
     </div>
 
-    <!-- MAIN WEBSITE CONTENT -->
     <div class="content-layer">
         
-        <!-- HERO -->
         <section id="hero">
             <div id="hero-content" class="max-w-7xl mx-auto px-4 w-full text-center">
-                <span class="text-gold text-[11px] md:text-xs font-black tracking-[1em] uppercase mb-8 block drop-shadow-lg">Building Digital Legacies</span>
+                <span class="text-gold text-[10px] md:text-xs font-black tracking-[0.6em] md:tracking-[1em] uppercase mb-6 block">Building Digital Legacies</span>
                 <h1 class="heading-font text-huge font-black text-white mb-8">
                     MIGHTY<br><span class="text-gradient-gold">TECK</span>
                 </h1>
-                <p class="max-w-3xl mx-auto text-white text-xl md:text-2xl mb-12 font-light text-bright leading-relaxed">
-                    Scientific precision meets high-end aesthetics. We engineer digital ecosystems designed for total market dominance and maximum revenue extraction.
+                <p class="max-w-2xl mx-auto text-white text-lg md:text-2xl mb-12 font-light leading-relaxed">
+                    Scientific precision meets high-end aesthetics. We engineer digital ecosystems designed for total market dominance.
                 </p>
-                <div class="mt-8 flex flex-col sm:flex-row justify-center gap-6">
-                    <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold">Initiate Contact</a>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold text-black">Initiate Contact</a>
                 </div>
             </div>
         </section>
 
         <!-- PHILOSOPHY -->
         <section id="philosophy">
-            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-24 items-center px-4 w-full">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-24 items-center px-4 w-full">
                 <div class="reveal">
                     <h2 class="powerful-caption">A BUSINESS WITHOUT A WEBSITE IS A <span class="text-cyan-400">MAN WITHOUT A CAR.</span></h2>
-                    <p class="text-lg lg:text-xl text-white/90 font-light leading-relaxed mb-10">
-                        In the modern era, you are either the hammer or the nail. 97% of consumers find their future partners online. Without a high-performance website, you aren't even in the race. We provide the machine you need to outpace everyone.
+                    <p class="text-base md:text-xl text-white/90 font-light leading-relaxed mb-8">
+                        In the modern era, you are either the hammer or the nail. 97% of consumers find their future partners online. Without a high-performance website, you aren't even in the race.
                     </p>
-                    <div class="grid grid-cols-2 gap-8 mb-10">
-                        <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
-                            <h5 class="text-gold font-bold mb-3 text-lg">Velocity</h5>
-                            <p class="text-base text-white/70">Optimized infrastructure for sub-2s global load speeds.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+                        <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                            <h5 class="text-gold font-bold mb-1">Velocity</h5>
+                            <p class="text-xs text-white/70">Sub-2s global load speeds.</p>
                         </div>
-                        <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
-                            <h5 class="text-cyan-400 font-bold mb-3 text-lg">Psychology</h5>
-                            <p class="text-base text-white/70">Interfaces expertly crafted to convert curiosity into capital.</p>
+                        <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                            <h5 class="text-cyan-400 font-bold mb-1">Psychology</h5>
+                            <p class="text-xs text-white/70">Interfaces crafted to convert.</p>
                         </div>
                     </div>
                     <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow">Book Strategy Session</a>
                 </div>
                 <div class="glass-card reveal">
-                    <h3 class="text-3xl font-bold mb-10 text-white heading-font">The Advantage</h3>
-                    <ul class="space-y-10">
-                        <li class="flex gap-6">
-                            <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center flex-shrink-0 border border-cyan-400/30 shadow-[0_0_20px_rgba(0,240,255,0.1)]">
-                                <i data-lucide="zap" class="text-cyan-400 w-8 h-8"></i>
-                            </div>
+                    <h3 class="text-2xl font-bold mb-8 text-white heading-font">The Advantage</h3>
+                    <ul class="space-y-8">
+                        <li class="flex gap-4">
+                            <i data-lucide="zap" class="text-cyan-400 w-8 h-8 flex-shrink-0"></i>
                             <div>
-                                <h4 class="text-xl text-white font-bold mb-2">Elite Codebase</h4>
-                                <p class="text-base text-white/70 leading-relaxed">No templates. No bloat. Pure, hand-written architecture built for raw speed, security, and scalability.</p>
+                                <h4 class="text-white font-bold mb-1">Elite Codebase</h4>
+                                <p class="text-sm text-white/70">Pure architecture built for raw speed.</p>
                             </div>
                         </li>
-                        <li class="flex gap-6">
-                            <div class="w-16 h-16 rounded-2xl bg-gold/10 flex items-center justify-center flex-shrink-0 border border-gold/30 shadow-[0_0_20px_rgba(212,175,55,0.1)]">
-                                <i data-lucide="shield" class="text-gold w-8 h-8"></i>
-                            </div>
+                        <li class="flex gap-4">
+                            <i data-lucide="shield" class="text-gold w-8 h-8 flex-shrink-0"></i>
                             <div>
-                                <h4 class="text-xl text-white font-bold mb-2">Market Dominance</h4>
-                                <p class="text-base text-white/70 leading-relaxed">Integrated SEO and brand cinematography that instantly places you miles ahead of established competitors.</p>
+                                <h4 class="text-white font-bold mb-1">Market Dominance</h4>
+                                <p class="text-sm text-white/70">Integrated SEO and brand cinematography.</p>
                             </div>
                         </li>
                     </ul>
@@ -247,143 +216,110 @@
             </div>
         </section>
 
-        <!-- PRICING SECTION -->
+        <!-- PRICING -->
         <section id="pricing">
             <div class="max-w-7xl mx-auto w-full px-4">
-                <div class="text-center mb-16 lg:mb-24 reveal">
-                    <span class="text-gold text-[12px] font-black tracking-[1em] uppercase mb-4 block drop-shadow-md">Digital Investment</span>
+                <div class="text-center mb-16 reveal">
                     <h2 class="powerful-caption">TIERS OF <span class="text-gold">EXCELLENCE</span></h2>
                 </div>
-                <div class="grid lg:grid-cols-3 gap-8 items-stretch">
-                    
-                    <!-- Tier 1 -->
-                    <div class="glass-card pricing-card reveal">
-                        <div class="mb-10">
-                            <h4 class="text-white/50 uppercase tracking-[0.3em] text-xs font-black mb-6">Entry Protocol</h4>
-                            <div class="text-6xl font-black mb-6 text-white heading-font">$500</div>
-                            <p class="text-lg text-white mb-10 font-medium leading-relaxed drop-shadow-sm">The fundamental digital foundation required for bold, emerging startups.</p>
-                            <ul class="check-list">
-                                <li><i data-lucide="check" class="check-icon"></i> High-End Single Page Landing</li>
-                                <li><i data-lucide="check" class="check-icon"></i> Professional Business Email</li>
-                                <li><i data-lucide="check" class="check-icon"></i> Mobile First Response UI</li>
-                                <li><i data-lucide="check" class="check-icon"></i> Google Search Console Setup</li>
-                                <li><i data-lucide="check" class="check-icon"></i> 24-Hour Lead Response Form</li>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="glass-card reveal flex flex-col justify-between">
+                        <div>
+                            <div class="text-4xl font-black mb-4 text-white heading-font">$500</div>
+                            <h4 class="text-gold uppercase tracking-widest text-xs font-black mb-6">Entry Protocol</h4>
+                            <ul class="check-list mb-8">
+                                <li><i data-lucide="check" class="check-icon"></i> High-End Single Page</li>
+                                <li><i data-lucide="check" class="check-icon"></i> Business Email</li>
+                                <li><i data-lucide="check" class="check-icon"></i> Mobile Responsive UI</li>
                             </ul>
                         </div>
-                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow w-full text-center hover:bg-white/10">Start Now</a>
+                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold text-black w-full">Start Now</a>
                     </div>
                     
-                    <!-- Tier 2 - Social Synergy -->
-                    <div class="glass-card pricing-card border-gold/50 reveal bg-white/10 lg:scale-105 shadow-[0_30px_60px_rgba(0,0,0,0.6),_0_0_30px_rgba(212,175,55,0.2)] relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
-                        <div class="mb-10">
-                            <span class="bg-gold text-black text-[10px] font-black px-4 py-1.5 rounded-full mb-6 inline-block tracking-widest shadow-[0_0_15px_rgba(212,175,55,0.4)]">SOCIAL SYNERGY</span>
-                            <div class="text-6xl font-black mb-6 text-white heading-font">$700</div>
-                            <p class="text-lg text-white mb-10 font-bold leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Dominate the social landscape with deeply integrated commerce features.</p>
-                            <ul class="check-list">
-                                <li><i data-lucide="check" class="check-icon"></i> Everything in Basic Protocol</li>
-                                <li><i data-lucide="check" class="check-icon"></i> <strong>Instagram & Facebook</strong> Shop</li>
-                                <li><i data-lucide="check" class="check-icon"></i> <strong>LinkedIn</strong> Executive Optimization</li>
-                                <li><i data-lucide="check" class="check-icon"></i> Dynamic Product Catalog Sync</li>
-                                <li><i data-lucide="check" class="check-icon"></i> Advanced Pixels for Retargeting</li>
+                    <div class="glass-card border-gold/50 reveal flex flex-col justify-between bg-white/5 lg:scale-105">
+                        <div>
+                            <div class="text-4xl font-black mb-4 text-white heading-font">$700</div>
+                            <h4 class="text-gold uppercase tracking-widest text-xs font-black mb-6">Social Synergy</h4>
+                            <ul class="check-list mb-8">
+                                <li><i data-lucide="check" class="check-icon"></i> Everything in Basic</li>
+                                <li><i data-lucide="check" class="check-icon"></i> Instagram & FB Shop</li>
+                                <li><i data-lucide="check" class="check-icon"></i> LinkedIn Optimization</li>
                             </ul>
                         </div>
-                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold w-full text-center text-black">Acquire Growth</a>
+                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold w-full text-black">Acquire Growth</a>
                     </div>
-                    
-                    <!-- Tier 3 -->
-                    <div class="glass-card pricing-card reveal">
-                        <div class="mb-10">
-                            <h4 class="text-white/50 uppercase tracking-[0.3em] text-xs font-black mb-6">Total Dominion</h4>
-                            <div class="text-6xl font-black mb-6 text-white heading-font">$1000</div>
-                            <p class="text-lg text-white mb-10 font-medium leading-relaxed drop-shadow-sm">The absolute nuclear option engineered for established, market-leading brands.</p>
-                            <ul class="check-list">
-                                <li><i data-lucide="check" class="check-icon"></i> Multi-Page Enterprise Website</li>
-                                <li><i data-lucide="check" class="check-icon"></i> <strong>6 Months Free Maintenance</strong></li>
-                                <li><i data-lucide="check" class="check-icon"></i> Full Branding & Media Assets</li>
-                                <li><i data-lucide="check" class="check-icon"></i> Weekly Security Audits & Backups</li>
-                                <li><i data-lucide="check" class="check-icon"></i> Dedicated 1-on-1 Strategy</li>
+
+                    <div class="glass-card reveal flex flex-col justify-between">
+                        <div>
+                            <div class="text-4xl font-black mb-4 text-white heading-font">$1000</div>
+                            <h4 class="text-gold uppercase tracking-widest text-xs font-black mb-6">Total Dominion</h4>
+                            <ul class="check-list mb-8">
+                                <li><i data-lucide="check" class="check-icon"></i> Multi-Page Enterprise</li>
+                                <li><i data-lucide="check" class="check-icon"></i> 6 Months Maintenance</li>
+                                <li><i data-lucide="check" class="check-icon"></i> Full Branding Assets</li>
                             </ul>
                         </div>
-                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow w-full text-center hover:bg-white/10">Claim Authority</a>
+                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold text-black w-full">Claim Authority</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SERVICES SECTION -->
-        <section id="performance" class="py-32">
+        <!-- SERVICES (RESTORED COMPREHENSIVE ARSENAL) -->
+        <section id="arsenal">
             <div class="max-w-7xl mx-auto w-full px-4">
-                <div class="text-center mb-16 lg:mb-24 reveal">
-                    <span class="text-cyan-400 text-[12px] font-black tracking-[1em] uppercase mb-4 block drop-shadow-md">Comprehensive Arsenal</span>
+                <div class="text-center mb-16 reveal">
+                    <span class="text-cyan-400 text-[10px] font-black tracking-[0.8em] uppercase mb-4 block">Comprehensive Arsenal</span>
                     <h2 class="powerful-caption">BEYOND THE <span class="text-cyan-400">INTERFACE</span></h2>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     
                     <!-- Drone Photography -->
-                    <div class="glass-card reveal flex flex-col h-full hover:border-cyan-400/40 transition-all duration-500">
-                        <div class="flex-grow">
-                            <div class="service-tag">Production</div>
-                            <i data-lucide="camera" class="mb-6 text-cyan-400 w-10 h-10 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)]"></i>
-                            <h4 class="text-2xl font-bold mb-4 text-white">Drone Photography</h4>
-                            <h5 class="text-sm font-black text-cyan-400/80 uppercase tracking-widest mb-4">"Ascend above the competition."</h5>
-                            <p class="text-base text-white/70 leading-relaxed">We deliver high-altitude perspectives that showcase the true scale of your enterprise assets.</p>
-                        </div>
+                    <div class="glass-card reveal">
+                        <div class="service-tag">Production</div>
+                        <h4 class="text-xl font-bold mb-1 text-white">Drone Photography</h4>
+                        <p class="text-gold text-xs italic mb-4">"Ascend above the competition."</p>
+                        <p class="text-sm text-white/70 leading-relaxed">We deliver high-altitude perspectives that showcase the true scale of your enterprise assets.</p>
                     </div>
-                    
+
                     <!-- Videography -->
-                    <div class="glass-card reveal flex flex-col h-full hover:border-cyan-400/40 transition-all duration-500">
-                        <div class="flex-grow">
-                            <div class="service-tag">Motion</div>
-                            <i data-lucide="video" class="mb-6 text-cyan-400 w-10 h-10 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)]"></i>
-                            <h4 class="text-2xl font-bold mb-4 text-white">Videography</h4>
-                            <h5 class="text-sm font-black text-cyan-400/80 uppercase tracking-widest mb-4">"Visual storytelling engineered to convert."</h5>
-                            <p class="text-base text-white/70 leading-relaxed">We capture motion that moves the needle on your brand's market valuation.</p>
-                        </div>
+                    <div class="glass-card reveal">
+                        <div class="service-tag">Motion</div>
+                        <h4 class="text-xl font-bold mb-1 text-white">Videography</h4>
+                        <p class="text-gold text-xs italic mb-4">"Visual storytelling engineered to convert."</p>
+                        <p class="text-sm text-white/70 leading-relaxed">We capture motion that moves the needle on your brand's market valuation.</p>
                     </div>
 
                     <!-- Video Editing -->
-                    <div class="glass-card reveal flex flex-col h-full hover:border-cyan-400/40 transition-all duration-500">
-                        <div class="flex-grow">
-                            <div class="service-tag">Refinement</div>
-                            <i data-lucide="scissors" class="mb-6 text-cyan-400 w-10 h-10 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)]"></i>
-                            <h4 class="text-2xl font-bold mb-4 text-white">Video Editing</h4>
-                            <h5 class="text-sm font-black text-cyan-400/80 uppercase tracking-widest mb-4">"The art of precision."</h5>
-                            <p class="text-base text-white/70 leading-relaxed">We refine raw data into cinematic narratives, ensuring every frame serves a strategic business purpose.</p>
-                        </div>
+                    <div class="glass-card reveal">
+                        <div class="service-tag">Refinement</div>
+                        <h4 class="text-xl font-bold mb-1 text-white">Video Editing</h4>
+                        <p class="text-gold text-xs italic mb-4">"The art of precision."</p>
+                        <p class="text-sm text-white/70 leading-relaxed">We refine raw data into cinematic narratives, ensuring every frame serves a strategic business purpose.</p>
                     </div>
 
                     <!-- Cinematography -->
-                    <div class="glass-card reveal flex flex-col h-full hover:border-cyan-400/40 transition-all duration-500">
-                        <div class="flex-grow">
-                            <div class="service-tag">Visuals</div>
-                            <i data-lucide="clapperboard" class="mb-6 text-cyan-400 w-10 h-10 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)]"></i>
-                            <h4 class="text-2xl font-bold mb-4 text-white">Cinematography</h4>
-                            <h5 class="text-sm font-black text-cyan-400/80 uppercase tracking-widest mb-4">"Bespoke visual excellence."</h5>
-                            <p class="text-base text-white/70 leading-relaxed">Lighting, composition, and direction designed to place your brand in the premium category.</p>
-                        </div>
+                    <div class="glass-card reveal">
+                        <div class="service-tag">Visuals</div>
+                        <h4 class="text-xl font-bold mb-1 text-white">Cinematography</h4>
+                        <p class="text-gold text-xs italic mb-4">"Bespoke visual excellence."</p>
+                        <p class="text-sm text-white/70 leading-relaxed">Lighting, composition, and direction designed to place your brand in the premium category.</p>
                     </div>
 
                     <!-- Quadcopter R&D -->
-                    <div class="glass-card reveal flex flex-col h-full hover:border-cyan-400/40 transition-all duration-500">
-                        <div class="flex-grow">
-                            <div class="service-tag">Engineering</div>
-                            <i data-lucide="cpu" class="mb-6 text-cyan-400 w-10 h-10 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)]"></i>
-                            <h4 class="text-2xl font-bold mb-4 text-white">Quadcopter R&D</h4>
-                            <h5 class="text-sm font-black text-cyan-400/80 uppercase tracking-widest mb-4">"Technical engineering at its peak."</h5>
-                            <p class="text-base text-white/70 leading-relaxed">Researching ArduPilot systems to redefine what's possible in autonomous flight.</p>
-                        </div>
+                    <div class="glass-card reveal">
+                        <div class="service-tag">Engineering</div>
+                        <h4 class="text-xl font-bold mb-1 text-white">Quadcopter R&D</h4>
+                        <p class="text-gold text-xs italic mb-4">"Technical engineering at its peak."</p>
+                        <p class="text-sm text-white/70 leading-relaxed">Researching ArduPilot systems to redefine what's possible in autonomous flight.</p>
                     </div>
 
                     <!-- Audio Production -->
-                    <div class="glass-card reveal flex flex-col h-full hover:border-cyan-400/40 transition-all duration-500">
-                        <div class="flex-grow">
-                            <div class="service-tag">Acoustics</div>
-                            <i data-lucide="mic-2" class="mb-6 text-cyan-400 w-10 h-10 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)]"></i>
-                            <h4 class="text-2xl font-bold mb-4 text-white">Audio Production</h4>
-                            <h5 class="text-sm font-black text-cyan-400/80 uppercase tracking-widest mb-4">"Soundscapes that command attention."</h5>
-                            <p class="text-base text-white/70 leading-relaxed">Precise audio engineering for commercials, podcasts, and corporate identity.</p>
-                        </div>
+                    <div class="glass-card reveal">
+                        <div class="service-tag">Acoustics</div>
+                        <h4 class="text-xl font-bold mb-1 text-white">Audio Production</h4>
+                        <p class="text-gold text-xs italic mb-4">"Soundscapes that command attention."</p>
+                        <p class="text-sm text-white/70 leading-relaxed">Precise audio engineering for commercials, podcasts, and corporate identity.</p>
                     </div>
 
                 </div>
@@ -391,62 +327,33 @@
         </section>
 
         <!-- DIRECTOR -->
-        <section id="director" class="min-h-screen py-20 relative">
+        <section id="director">
             <div class="max-w-6xl mx-auto w-full px-4 reveal">
-                <div class="glass-card relative overflow-hidden p-0 rounded-[2.5rem] md:rounded-[3.5rem] border border-gold/30 shadow-[0_0_50px_rgba(212,175,55,0.05)] bg-[#050508]/80">
-                    <div class="director-glow"></div>
-                    
-                    <div class="grid lg:grid-cols-2 relative z-10">
-                        <div class="p-10 lg:p-20 flex flex-col justify-center">
-                            <span class="text-gold font-bold tracking-[0.3em] text-xs mb-8 uppercase flex items-center gap-4">
-                                <div class="w-8 h-px bg-gold/50"></div> The Architect
-                            </span>
-                            <h2 class="heading-font text-5xl lg:text-7xl font-black mb-8 leading-[0.9] text-white">SANJAY<br><span class="text-gradient-gold">KATHULA</span></h2>
-                            
-                            <div class="space-y-8 mb-12">
-                                <div class="flex items-center gap-6 group">
-                                    <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center border border-gold/20 group-hover:bg-gold/20 transition-colors">
-                                        <i data-lucide="graduation-cap" class="w-5 text-gold"></i>
-                                    </div>
-                                    <span class="text-lg font-medium text-white/90">MS Computer Science</span>
-                                </div>
-                                <div class="flex items-center gap-6 group">
-                                    <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center border border-gold/20 group-hover:bg-gold/20 transition-colors">
-                                        <i data-lucide="mail" class="w-5 text-gold"></i>
-                                    </div>
-                                    <span class="text-lg font-medium text-white/90 break-all">sanjaykathulamusic@gmail.com</span>
-                                </div>
-                                <div class="flex items-center gap-6 group">
-                                    <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center border border-gold/20 group-hover:bg-gold/20 transition-colors">
-                                        <i data-lucide="phone" class="w-5 text-gold"></i>
-                                    </div>
-                                    <span class="text-lg font-medium text-white/90">603-233-0590</span>
-                                </div>
+                <div class="glass-card border-gold/30 bg-black/80">
+                    <div class="grid lg:grid-cols-2 items-center gap-12">
+                        <div>
+                            <span class="text-gold font-bold tracking-widest text-[10px] mb-8 uppercase block">The Architect</span>
+                            <h2 class="heading-font text-4xl md:text-6xl font-black mb-8 text-white">SANJAY<br><span class="text-gradient-gold">KATHULA</span></h2>
+                            <div class="space-y-4 mb-10">
+                                <p class="text-lg text-white/90 font-bold">MS Computer Science</p>
+                                <p class="text-white/70 break-all">sanjaykathulamusic@gmail.com</p>
+                                <p class="text-white/70">603-233-0590</p>
                             </div>
-                            
-                            <div class="flex flex-col sm:flex-row gap-4 mt-4">
-                                <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold text-center flex-1">Email Directly</a>
-                            </div>
+                            <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold text-black">Contact Architect</a>
                         </div>
-                        
-                        <div class="relative min-h-[400px] flex items-center justify-center p-10 lg:p-16 bg-gradient-to-bl from-black/80 to-transparent border-l border-white/5">
-                            <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#d4af37 1px, transparent 1px); background-size: 30px 30px;"></div>
-                            <div class="text-center z-10 relative">
-                                <div class="w-20 h-20 mx-auto mb-8 rounded-full bg-gold/5 flex items-center justify-center border border-gold/20 backdrop-blur-sm">
-                                    <i data-lucide="quote" class="w-8 h-8 text-gold drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]"></i>
-                                </div>
-                                <p class="text-2xl lg:text-3xl italic font-light text-white leading-relaxed">
-                                    "We don't sell websites. We build the infrastructure for digital dominance. If your brand isn't a weaponized experience, it's a liability."
-                                </p>
-                            </div>
+                        <div class="text-center p-8 bg-white/5 rounded-3xl">
+                            <i data-lucide="quote" class="w-12 h-12 mx-auto mb-6 text-gold"></i>
+                            <p class="text-xl md:text-2xl italic font-light text-white leading-relaxed">
+                                "We don't sell websites. We build the infrastructure for digital dominance."
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         
-        <footer class="border-t border-white/10 py-8 text-center bg-black/50 backdrop-blur-md">
-            <p class="text-white/40 text-sm font-medium tracking-widest uppercase">© 2026 Mighty Teck LLC. All Rights Reserved.</p>
+        <footer class="py-12 text-center border-t border-white/10">
+            <p class="text-white/40 text-[10px] font-medium tracking-widest uppercase px-4">© 2026 Mighty Teck LLC. All Rights Reserved.</p>
         </footer>
 
     </div>
@@ -454,18 +361,10 @@
     <script>
         lucide.createIcons();
 
-        // --------------------------------------------------------
-        // CINEMATIC 3D ENGINE
-        // --------------------------------------------------------
+        // --- 3D ENGINE (ORIGINAL RESTORED) ---
         const scene = new THREE.Scene();
-        scene.fog = new THREE.FogExp2(0x010103, 0.00015);
-
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 15000);
-        const renderer = new THREE.WebGLRenderer({ 
-            canvas: document.getElementById('global-canvas'), 
-            antialias: true, 
-            alpha: true 
-        });
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('global-canvas'), antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
@@ -475,83 +374,37 @@
         const loader = new THREE.TextureLoader();
         let mouseX = 0, mouseY = 0;
 
-        // EARTH
         const earthRadius = 150;
         const earthGeo = new THREE.SphereGeometry(earthRadius, 64, 64);
         const earthMat = new THREE.MeshStandardMaterial({
             map: loader.load('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg'),
-            roughness: 0.8, 
-            metalness: 0.1,
+            roughness: 0.8, metalness: 0.1,
         });
         const earth = new THREE.Mesh(earthGeo, earthMat);
         mainGroup.add(earth);
 
-        // STARS
         const starCount = 75000;
         const starGeo = new THREE.BufferGeometry();
         const starPos = new Float32Array(starCount * 3);
-        const starColors = new Float32Array(starCount * 3);
-        const color1 = new THREE.Color(0xffffff);
-        const color2 = new THREE.Color(0x00f0ff);
-        
         for(let i=0; i<starCount; i++) {
             starPos[i*3] = (Math.random() - 0.5) * 8000;
             starPos[i*3+1] = (Math.random() - 0.5) * 8000;
             starPos[i*3+2] = (Math.random() - 0.5) * 8000;
-            const mixedColor = color1.clone().lerp(color2, Math.random() * 0.4);
-            starColors[i*3] = mixedColor.r;
-            starColors[i*3+1] = mixedColor.g;
-            starColors[i*3+2] = mixedColor.b;
         }
         starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-        starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
-        
-        const starMat = new THREE.PointsMaterial({ 
-            size: 4, 
-            vertexColors: true,
-            transparent: true, 
-            opacity: 1, 
-            blending: THREE.AdditiveBlending 
-        });
+        const starMat = new THREE.PointsMaterial({ size: 3, color: 0xffffff, transparent: true, opacity: 0.8 });
         const stars = new THREE.Points(starGeo, starMat);
         scene.add(stars);
-
-        // 3D SHOOTING STARS
-        const shootingStars = new THREE.Group();
-        scene.add(shootingStars);
-        
-        const createShootingStar = () => {
-            const geometry = new THREE.CylinderGeometry(0, 0.8, 400, 4);
-            geometry.rotateX(Math.PI / 2);
-            const material = new THREE.MeshBasicMaterial({ 
-                color: Math.random() > 0.5 ? 0x00ffff : 0xffffff,
-                transparent: true, 
-                opacity: 1,
-                blending: THREE.AdditiveBlending
-            });
-            const star = new THREE.Mesh(geometry, material);
-            star.position.set((Math.random() - 0.5) * 6000, (Math.random() - 0.5) * 6000, camera.position.z - 4000);
-            const velocity = new THREE.Vector3((Math.random() - 0.5) * 4, (Math.random() - 0.5) * 4, 15 + Math.random() * 15);
-            star.userData = { velocity, life: 0, maxLife: 400 };
-            star.lookAt(star.position.clone().add(velocity));
-            shootingStars.add(star);
-        };
 
         const sunLight = new THREE.PointLight(0xffffff, 4, 8000);
         sunLight.position.set(1000, 1000, 1500);
         scene.add(sunLight);
         scene.add(new THREE.AmbientLight(0x222233, 0.6));
 
+        // ORIGINAL CAMERA POSITION
         camera.position.set(0, 0, 7000);
 
-        window.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth) - 0.5;
-            mouseY = (e.clientY / window.innerHeight) - 0.5;
-        });
-
-        // --------------------------------------------------------
-        // GSAP SCROLL ANIMATIONS
-        // --------------------------------------------------------
+        // --- GSAP TIMELINE (ORIGINAL RESTORED) ---
         gsap.registerPlugin(ScrollTrigger);
 
         const introTl = gsap.timeline({
@@ -559,58 +412,33 @@
                 trigger: "#intro-void",
                 start: "top top",
                 end: "bottom top",
-                scrub: 4,
-                onUpdate: (self) => {
-                    camera.fov = 45 + (self.progress * 5);
-                    camera.updateProjectionMatrix();
-                }
+                scrub: 3
             }
         });
 
-        introTl.to(".intro-text", { opacity: 1, y: 0, duration: 2, stagger: 0.5, ease: "none" }, 0)
-               .to(".scroll-indicator", { opacity: 0, duration: 1 }, 0.5)
-               .to(".intro-text", { opacity: 0, y: -100, duration: 2, stagger: 0.4, ease: "none" }, 5)
-               .to(camera.position, { z: 50, duration: 12, ease: "none" }, 0)
-               .to(earth.rotation, { y: Math.PI * 1.5, x: 0.5, duration: 12, ease: "none" }, 0);
+        introTl.to(".intro-text", { opacity: 1, y: 0, duration: 2, stagger: 0.5 }, 0)
+               .to(".intro-text", { opacity: 0, y: -100, duration: 2, stagger: 0.4 }, 5)
+               .to(camera.position, { z: 50, duration: 12 }, 0) // ORIGINAL ZOOM VALUE
+               .to(earth.rotation, { y: Math.PI * 1.5, x: 0.5, duration: 12 }, 0);
 
         gsap.set("#hero-content", { opacity: 0, y: 50 });
         ScrollTrigger.create({
             trigger: "#intro-void",
-            start: "90% top", 
+            start: "98% top", 
             onEnter: () => gsap.to("#hero-content", { opacity: 1, y: 0, duration: 2, ease: "expo.out" }),
             onLeaveBack: () => gsap.to("#hero-content", { opacity: 0, y: 50, duration: 1 })
         });
 
         document.querySelectorAll('.reveal').forEach(el => {
             gsap.from(el, {
-                opacity: 0, 
-                y: 60, 
-                duration: 1.5, 
-                ease: "expo.out",
+                opacity: 0, y: 40, duration: 1.2,
                 scrollTrigger: { trigger: el, start: "top 90%" }
             });
         });
 
-        // --------------------------------------------------------
-        // RENDER LOOP
-        // --------------------------------------------------------
         function animate() {
             requestAnimationFrame(animate);
             earth.rotation.y += 0.0006;
-            stars.rotation.y += 0.00003;
-            
-            if (Math.random() < 0.02) createShootingStar();
-            
-            shootingStars.children.forEach(star => {
-                star.position.add(star.userData.velocity);
-                star.userData.life++;
-                if (star.userData.life > star.userData.maxLife * 0.75) star.material.opacity -= 0.04;
-                if (star.material.opacity <= 0 || star.position.z > camera.position.z + 500) {
-                    shootingStars.remove(star);
-                    star.geometry.dispose();
-                    star.material.dispose();
-                }
-            });
             
             const targetX = mouseX * 50;
             const targetY = -mouseY * 50;
@@ -618,10 +446,14 @@
             camera.position.y += (targetY - camera.position.y) * 0.02;
             camera.lookAt(0, 0, 0);
             
-            starMat.opacity = 0.8 + Math.sin(Date.now() * 0.002) * 0.2;
             renderer.render(scene, camera);
         }
         animate();
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) - 0.5;
+            mouseY = (e.clientY / window.innerHeight) - 0.5;
+        });
 
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth/window.innerHeight;
