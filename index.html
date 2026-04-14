@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Mighty Teck LLC | Galactic Digital Supremacy</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -26,17 +26,14 @@
             color: #ffffff;
             margin: 0;
             overflow-x: hidden;
-            width: 100%;
         }
 
         .heading-font { font-family: 'Syncopate', sans-serif; }
 
         #global-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 0;
             pointer-events: none;
         }
@@ -46,172 +43,247 @@
             display: flex;
             align-items: center;
             position: relative;
-            padding: 4rem 1.5rem;
+            padding: 5rem 1.5rem;
             z-index: 10;
-            width: 100%;
-            box-sizing: border-box;
         }
 
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(25px);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 2rem;
+            padding: 2rem;
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease;
-            width: 100%;
+        }
+
+        .pricing-card {
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
         }
 
-        @media (min-width: 768px) {
-            .glass-card { padding: 3rem; border-radius: 2rem; }
-            section { padding: 8rem 4rem; }
-        }
-
-        .text-huge { 
-            font-size: clamp(2.5rem, 10vw, 8rem); 
-            line-height: 1.1; 
-            letter-spacing: -0.05em; 
-            text-shadow: 0 10px 30px rgba(0,0,0,0.8); 
-        }
+        .card-blue { border-color: rgba(0, 240, 255, 0.3); }
+        .card-gold { border-color: rgba(212, 175, 55, 0.4); }
         
-        .text-gradient-gold { 
-            background: linear-gradient(135deg, #ffffff, #d4af37, #a68a2d); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
+        .glass-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-8px);
         }
+
+        .text-huge { font-size: clamp(3rem, 12vw, 8rem); line-height: 0.9; letter-spacing: -0.05em; }
+        .text-gradient-gold { background: linear-gradient(135deg, #ffffff, #d4af37, #a68a2d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .text-gradient-cyan { background: linear-gradient(135deg, #ffffff, #00f0ff, #008891); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .powerful-caption { font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 2rem; color: #fff; }
 
         .btn-glow {
-            padding: 1rem 2rem;
+            padding: 0.8rem 1.8rem;
             border-radius: 999px;
             text-transform: uppercase;
             font-weight: 800;
-            letter-spacing: 0.15em;
-            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            font-size: 0.7rem;
             transition: all 0.4s;
             border: 1px solid rgba(255,255,255,0.2);
             background: rgba(255,255,255,0.08);
             color: white;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 0 20px rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
-            text-align: center;
+            cursor: pointer;
         }
 
         .btn-gold { background: var(--gold); color: black; border: none; }
-        .btn-gold:hover { transform: scale(1.05); filter: brightness(1.15); background: var(--gold); }
-
-        .powerful-caption { font-size: clamp(1.75rem, 5vw, 4rem); font-weight: 800; line-height: 1.2; margin-bottom: 1.5rem; color: #fff; }
+        .btn-gold:hover { transform: scale(1.05); filter: brightness(1.15); }
 
         .check-list li { 
             display: flex; 
             align-items: flex-start; 
-            gap: 0.75rem; 
-            font-size: 0.95rem; 
-            color: rgba(255, 255, 255, 0.9); 
-            margin-bottom: 1rem;
+            gap: 1rem; 
+            font-size: 0.9rem; 
+            color: rgba(255, 255, 255, 0.85); 
+            margin-bottom: 0.75rem;
         }
-        .check-icon { color: var(--gold); flex-shrink: 0; margin-top: 0.2rem; }
+        .check-icon { color: var(--gold); width: 1rem; height: 1rem; flex-shrink: 0; margin-top: 0.2rem; }
+
+        .payment-methods {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            opacity: 0.6;
+            justify-content: center;
+        }
 
         .service-tag {
-            background: rgba(0, 240, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             color: var(--cyan);
             padding: 4px 10px;
             border-radius: 4px;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 900;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
             margin-bottom: 1rem;
             border: 1px solid rgba(0, 240, 255, 0.2);
-            display: inline-block;
-            width: fit-content;
         }
 
         .content-layer {
             position: relative;
             z-index: 10;
-            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .transition-text-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            filter: blur(10px);
+        }
+
+        #loader-bar {
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+        }
+        
+        .stat-glow {
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
         }
     </style>
 </head>
-<body>
+<body class="bg-[#010103]">
 
     <canvas id="global-canvas"></canvas>
 
-    <!-- ORIGINAL INTRO SEQUENCE (Restored Values) -->
-    <div id="intro-void" class="h-[500vh] relative z-20">
-        <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center pointer-events-none px-4 text-center">
-            <div class="overflow-hidden">
-                <h2 class="intro-text text-3xl md:text-6xl lg:text-8xl font-black heading-font text-white tracking-widest opacity-0 transform translate-y-20">PREPARE FOR</h2>
-            </div>
-            <div class="overflow-hidden mt-6">
-                <h2 class="intro-text text-3xl md:text-6xl lg:text-8xl font-black heading-font text-cyan-400 tracking-widest opacity-0 transform translate-y-20">SUPREMACY</h2>
-            </div>
-            
-            <div class="scroll-indicator absolute bottom-12 flex flex-col items-center gap-4 animate-bounce">
-                <span class="text-white/60 text-[10px] tracking-[0.3em] uppercase font-bold">Scroll to Penetrate</span>
-                <i data-lucide="chevrons-down" class="text-gold w-5 h-5"></i>
+    <!-- TRANSITION SCREEN -->
+    <div id="transition-screen" class="fixed inset-0 z-[60] bg-[#010103] flex flex-col items-center justify-center opacity-0 invisible">
+        <div class="text-center px-4">
+            <h2 class="heading-font text-lg md:text-2xl font-black text-white tracking-[0.3em] mb-8">
+                BUILD WITH <span class="text-gradient-gold">MIGHTY TECK</span>
+            </h2>
+            <div class="w-48 h-1 bg-white/10 mx-auto rounded-full overflow-hidden mb-12">
+                <div id="loader-bar" class="h-full bg-cyan-400 w-0"></div>
             </div>
         </div>
     </div>
 
-    <div class="content-layer">
+    <!-- ZOOM INTRO SEQUENCE -->
+    <div id="intro-void" class="h-[1200vh] relative z-20">
+        <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-end pb-16 pointer-events-none px-4">
+            <div class="flex flex-col items-center text-center mb-8">
+                <h2 class="intro-text transition-text-reveal text-xs md:text-sm font-black heading-font tracking-[0.5em]">
+                    <span class="text-cyan-400">READY TO</span> <span class="text-gradient-gold">EVOLVE?</span>
+                </h2>
+            </div>
+            
+            <div id="initial-scroll-indicator" class="flex flex-col items-center gap-2 opacity-0">
+                <span class="text-white/40 text-[9px] tracking-[0.4em] uppercase font-bold">Scroll to Initiate</span>
+                <i data-lucide="chevron-down" class="text-gold/50 w-4 h-4"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-layer" id="main-content">
         
+        <!-- HERO -->
         <section id="hero">
             <div id="hero-content" class="max-w-7xl mx-auto px-4 w-full text-center">
-                <span class="text-gold text-[10px] md:text-xs font-black tracking-[0.6em] md:tracking-[1em] uppercase mb-6 block">Building Digital Legacies</span>
+                <span class="text-gold text-[10px] font-black tracking-[1em] uppercase mb-8 block">Digital Legacies</span>
                 <h1 class="heading-font text-huge font-black text-white mb-8">
                     MIGHTY<br><span class="text-gradient-gold">TECK</span>
                 </h1>
-                <p class="max-w-2xl mx-auto text-white text-lg md:text-2xl mb-12 font-light leading-relaxed">
-                    Scientific precision meets high-end aesthetics. We engineer digital ecosystems designed for total market dominance.
+                <p class="max-w-3xl mx-auto text-white/80 text-lg md:text-xl mb-12 font-light leading-relaxed">
+                    Engineering high-performance digital engines for the world's most ambitious businesses.
                 </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold text-black">Initiate Contact</a>
-                </div>
+                <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold">Initiate Contact</a>
             </div>
         </section>
 
         <!-- PHILOSOPHY -->
         <section id="philosophy">
-            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-24 items-center px-4 w-full">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center px-4 w-full">
                 <div class="reveal">
-                    <h2 class="powerful-caption">A BUSINESS WITHOUT A WEBSITE IS A <span class="text-cyan-400">MAN WITHOUT A CAR.</span></h2>
-                    <p class="text-base md:text-xl text-white/90 font-light leading-relaxed mb-8">
-                        In the modern era, you are either the hammer or the nail. 97% of consumers find their future partners online. Without a high-performance website, you aren't even in the race.
+                    <h2 class="powerful-caption uppercase">If your business is <span class="text-cyan-400">not online</span> then your business is <span class="text-gold">out of business.</span></h2>
+                    <p class="text-lg text-white/70 font-light leading-relaxed mb-10">
+                        The digital landscape is your survival. We build your defense against obscurity and your vehicle for exponential growth.
                     </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
-                        <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-                            <h5 class="text-gold font-bold mb-1">Velocity</h5>
-                            <p class="text-xs text-white/70">Sub-2s global load speeds.</p>
+                    <div class="grid grid-cols-2 gap-6 mb-10">
+                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                            <h5 class="text-gold font-bold mb-2 text-sm uppercase tracking-wider">Presence</h5>
+                            <p class="text-xs text-white/50 leading-relaxed">Securing your permanent spot in the global marketplace.</p>
                         </div>
-                        <div class="p-4 rounded-xl bg-white/5 border border-white/10">
-                            <h5 class="text-cyan-400 font-bold mb-1">Psychology</h5>
-                            <p class="text-xs text-white/70">Interfaces crafted to convert.</p>
+                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                            <h5 class="text-cyan-400 font-bold mb-2 text-sm uppercase tracking-wider">Logic</h5>
+                            <p class="text-xs text-white/50 leading-relaxed">Converting user attention into actionable business capital.</p>
                         </div>
                     </div>
-                    <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow">Book Strategy Session</a>
+                    <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow">Strategy Session</a>
                 </div>
-                <div class="glass-card reveal">
+                <div class="glass-card reveal border-white/10">
                     <h3 class="text-2xl font-bold mb-8 text-white heading-font">The Advantage</h3>
-                    <ul class="space-y-8">
-                        <li class="flex gap-4">
-                            <i data-lucide="zap" class="text-cyan-400 w-8 h-8 flex-shrink-0"></i>
+                    <div class="space-y-8">
+                        <div class="flex gap-5">
+                            <i data-lucide="zap" class="text-cyan-400 w-6 h-6 flex-shrink-0"></i>
                             <div>
-                                <h4 class="text-white font-bold mb-1">Elite Codebase</h4>
-                                <p class="text-sm text-white/70">Pure architecture built for raw speed.</p>
+                                <h4 class="text-white font-bold mb-1">Ultra-Fast Stacks</h4>
+                                <p class="text-sm text-white/50">Performance first architecture for modern SEO dominance.</p>
                             </div>
-                        </li>
-                        <li class="flex gap-4">
-                            <i data-lucide="shield" class="text-gold w-8 h-8 flex-shrink-0"></i>
+                        </div>
+                        <div class="flex gap-5">
+                            <i data-lucide="shield" class="text-gold w-6 h-6 flex-shrink-0"></i>
                             <div>
-                                <h4 class="text-white font-bold mb-1">Market Dominance</h4>
-                                <p class="text-sm text-white/70">Integrated SEO and brand cinematography.</p>
+                                <h4 class="text-white font-bold mb-1">Brand Authority</h4>
+                                <p class="text-sm text-white/50">Sophisticated design that commands respect instantly.</p>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW: WHY A WEBSITE? -->
+        <section id="digital-catalyst" class="bg-white/[0.01]">
+            <div class="max-w-7xl mx-auto w-full px-4 py-20">
+                <div class="grid lg:grid-cols-2 gap-20 items-center">
+                    <div class="reveal">
+                        <span class="text-cyan-400 text-[10px] font-black tracking-[0.6em] uppercase mb-6 block">The Digital Shift</span>
+                        <h2 class="powerful-caption mb-8">A WEBSITE <span class="text-gradient-gold">CHANGES EVERYTHING</span></h2>
+                        <div class="space-y-6 text-white/70 font-light text-lg leading-relaxed">
+                            <p>In the modern era, your website is your <strong>Global Headquarters</strong>. It is the only employee that works 24/7, never sleeps, and speaks to thousands of customers simultaneously.</p>
+                            <p>At Mighty Teck, we don't just build pages; we build <strong>Digital Real Estate</strong>. By integrating immersive 2D and 3D web environments, we transform a simple browse into a high-tier experience.</p>
+                            <div class="flex items-center gap-4 mt-8">
+                                <div class="w-12 h-1 bg-gold"></div>
+                                <span class="text-white font-bold tracking-widest uppercase text-xs">The Mighty Teck Method</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 reveal">
+                        <div class="glass-card p-8 border-cyan-400/20">
+                            <i data-lucide="box" class="text-cyan-400 w-8 h-8 mb-4"></i>
+                            <h4 class="text-white font-bold mb-2">3D Immersive</h4>
+                            <p class="text-xs text-white/40">Using WebGL and Three.js to create depth that separates you from 99% of competitors.</p>
+                        </div>
+                        <div class="glass-card p-8 border-gold/20 mt-0 sm:mt-8">
+                            <i data-lucide="layers" class="text-gold w-8 h-8 mb-4"></i>
+                            <h4 class="text-white font-bold mb-2">Top-Tier Status</h4>
+                            <p class="text-xs text-white/40">Premium aesthetics that justify higher pricing for your services and products.</p>
+                        </div>
+                        <div class="glass-card p-8 border-gold/20">
+                            <i data-lucide="trending-up" class="text-gold w-8 h-8 mb-4"></i>
+                            <h4 class="text-white font-bold mb-2">Market Authority</h4>
+                            <p class="text-xs text-white/40">Convert cold traffic into loyal clients through professional psychological design.</p>
+                        </div>
+                        <div class="glass-card p-8 border-cyan-400/20 mt-0 sm:mt-8">
+                            <i data-lucide="globe" class="text-cyan-400 w-8 h-8 mb-4"></i>
+                            <h4 class="text-white font-bold mb-2">Future Proof</h4>
+                            <p class="text-xs text-white/40">Scalable architecture that grows with your business from $1k to $1M+.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -220,108 +292,142 @@
         <section id="pricing">
             <div class="max-w-7xl mx-auto w-full px-4">
                 <div class="text-center mb-16 reveal">
-                    <h2 class="powerful-caption">TIERS OF <span class="text-gold">EXCELLENCE</span></h2>
+                    <span class="text-gold text-[10px] font-black tracking-[0.8em] uppercase mb-4 block">Investment</span>
+                    <h2 class="powerful-caption">PRICING <span class="text-gradient-gold">MODELS</span></h2>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="glass-card reveal flex flex-col justify-between">
-                        <div>
-                            <div class="text-4xl font-black mb-4 text-white heading-font">$500</div>
-                            <h4 class="text-gold uppercase tracking-widest text-xs font-black mb-6">Entry Protocol</h4>
-                            <ul class="check-list mb-8">
-                                <li><i data-lucide="check" class="check-icon"></i> High-End Single Page</li>
-                                <li><i data-lucide="check" class="check-icon"></i> Business Email</li>
-                                <li><i data-lucide="check" class="check-icon"></i> Mobile Responsive UI</li>
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Starter Plan -->
+                    <div class="glass-card pricing-card reveal card-blue">
+                        <div class="mb-10">
+                            <h4 class="text-cyan-400 uppercase tracking-[0.3em] text-[10px] font-black mb-4">Starter</h4>
+                            <div class="text-5xl font-black mb-6 text-white heading-font">$500</div>
+                            <ul class="check-list">
+                                <li><i data-lucide="check" class="check-icon"></i> 5 Page Professional Site</li>
+                                <li><i data-lucide="check" class="check-icon"></i> Mobile Responsive Design</li>
+                                <li><i data-lucide="check" class="check-icon"></i> Domain Setup</li>
                             </ul>
                         </div>
-                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold text-black w-full">Start Now</a>
+                        <div>
+                            <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow w-full text-center">Inquire & Pay</a>
+                            <div class="payment-methods">
+                                <i data-lucide="credit-card" class="w-4 h-4" title="Visa/Mastercard"></i>
+                                <i data-lucide="dollar-sign" class="w-4 h-4" title="Direct Deposit"></i>
+                                <i data-lucide="wallet" class="w-4 h-4" title="Crypto Accepted"></i>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="glass-card border-gold/50 reveal flex flex-col justify-between bg-white/5 lg:scale-105">
-                        <div>
-                            <div class="text-4xl font-black mb-4 text-white heading-font">$700</div>
-                            <h4 class="text-gold uppercase tracking-widest text-xs font-black mb-6">Social Synergy</h4>
-                            <ul class="check-list mb-8">
-                                <li><i data-lucide="check" class="check-icon"></i> Everything in Basic</li>
-                                <li><i data-lucide="check" class="check-icon"></i> Instagram & FB Shop</li>
-                                <li><i data-lucide="check" class="check-icon"></i> LinkedIn Optimization</li>
+                    <!-- Growth Plan -->
+                    <div class="glass-card pricing-card card-gold lg:scale-105 reveal">
+                        <div class="mb-10">
+                            <h4 class="text-gold uppercase tracking-[0.3em] text-[10px] font-black mb-4">Growth</h4>
+                            <div class="text-5xl font-black mb-6 text-white heading-font">$700</div>
+                            <ul class="check-list">
+                                <li><i data-lucide="check" class="check-icon"></i> Everything in Starter</li>
+                                <li><i data-lucide="check" class="check-icon"></i> FB & Instagram Shop</li>
+                                <li><i data-lucide="check" class="check-icon"></i> Meta Pixel Tracking</li>
                             </ul>
                         </div>
-                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold w-full text-black">Acquire Growth</a>
+                        <div>
+                            <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold w-full text-center">Acquire & Pay</a>
+                            <div class="payment-methods">
+                                <i data-lucide="credit-card" class="w-4 h-4" title="Visa/Mastercard"></i>
+                                <i data-lucide="dollar-sign" class="w-4 h-4" title="Direct Deposit"></i>
+                                <i data-lucide="wallet" class="w-4 h-4" title="Crypto Accepted"></i>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="glass-card reveal flex flex-col justify-between">
-                        <div>
-                            <div class="text-4xl font-black mb-4 text-white heading-font">$1000</div>
-                            <h4 class="text-gold uppercase tracking-widest text-xs font-black mb-6">Total Dominion</h4>
-                            <ul class="check-list mb-8">
-                                <li><i data-lucide="check" class="check-icon"></i> Multi-Page Enterprise</li>
+                    
+                    <!-- Dominion Plan -->
+                    <div class="glass-card pricing-card reveal card-blue">
+                        <div class="mb-10">
+                            <h4 class="text-cyan-400 uppercase tracking-[0.3em] text-[10px] font-black mb-4">Dominion</h4>
+                            <div class="text-5xl font-black mb-6 text-white heading-font">$1000</div>
+                            <ul class="check-list">
+                                <li><i data-lucide="check" class="check-icon"></i> Full Enterprise Setup</li>
                                 <li><i data-lucide="check" class="check-icon"></i> 6 Months Maintenance</li>
-                                <li><i data-lucide="check" class="check-icon"></i> Full Branding Assets</li>
+                                <li><i data-lucide="check" class="check-icon"></i> Full Social (FB, IG, LinkedIn)</li>
+                                <li><i data-lucide="check" class="check-icon"></i> 5 Major Post-Launch Changes</li>
                             </ul>
                         </div>
-                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold text-black w-full">Claim Authority</a>
+                        <div>
+                            <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow w-full text-center">Dominate & Pay</a>
+                            <div class="payment-methods">
+                                <i data-lucide="credit-card" class="w-4 h-4" title="Visa/Mastercard"></i>
+                                <i data-lucide="dollar-sign" class="w-4 h-4" title="Direct Deposit"></i>
+                                <i data-lucide="wallet" class="w-4 h-4" title="Crypto Accepted"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <p class="text-center text-white/30 text-[10px] mt-12 uppercase tracking-[0.2em]">Secure payments processed via invoice. All major cards and bank transfers accepted.</p>
             </div>
         </section>
 
-        <!-- SERVICES (RESTORED COMPREHENSIVE ARSENAL) -->
-        <section id="arsenal">
+        <!-- ECOSYSTEM INTRO -->
+        <section id="ecosystem-intro">
+            <div class="max-w-4xl mx-auto px-4 text-center reveal">
+                <span class="text-cyan-400 text-[10px] font-black tracking-[0.6em] uppercase mb-6 block">Services Suite</span>
+                <h2 class="powerful-caption">MIGHTY TECK <span class="text-gradient-gold">ECOSYSTEM</span></h2>
+                <p class="text-lg text-white/60 font-light leading-relaxed">
+                    We provide a full-spectrum digital arsenal. From cinematic drone footage to intelligent automation, we equip your business with the tools to dominate every medium.
+                </p>
+            </div>
+        </section>
+
+        <!-- BEYOND THE INTERFACE -->
+        <section id="performance" class="py-24">
             <div class="max-w-7xl mx-auto w-full px-4">
-                <div class="text-center mb-16 reveal">
-                    <span class="text-cyan-400 text-[10px] font-black tracking-[0.8em] uppercase mb-4 block">Comprehensive Arsenal</span>
-                    <h2 class="powerful-caption">BEYOND THE <span class="text-cyan-400">INTERFACE</span></h2>
-                </div>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="glass-card reveal flex flex-col h-full border-white/10">
+                        <div class="flex-grow mb-8">
+                            <div class="service-tag">Production</div>
+                            <i data-lucide="camera" class="mb-4 text-cyan-400 w-8 h-8"></i>
+                            <h4 class="text-xl font-bold mb-3 text-white">Drone Photography</h4>
+                            <p class="text-sm text-white/50">Aerial intelligence and high-altitude marketing visuals.</p>
+                        </div>
+                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow w-full text-center">Enquire</a>
+                    </div>
+
+                    <div class="glass-card reveal flex flex-col h-full border-white/10">
+                        <div class="flex-grow mb-8">
+                            <div class="service-tag">Motion</div>
+                            <i data-lucide="video" class="mb-4 text-cyan-400 w-8 h-8"></i>
+                            <h4 class="text-xl font-bold mb-3 text-white">Videography</h4>
+                            <p class="text-sm text-white/50">Cinematic story-telling for premium brand positioning.</p>
+                        </div>
+                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow w-full text-center">Enquire</a>
+                    </div>
+
+                    <div class="glass-card reveal flex flex-col h-full border-white/10">
+                        <div class="flex-grow mb-8">
+                            <div class="service-tag">Refinement</div>
+                            <i data-lucide="scissors" class="mb-4 text-cyan-400 w-8 h-8"></i>
+                            <h4 class="text-xl font-bold mb-3 text-white">Video Editing</h4>
+                            <p class="text-sm text-white/50">High-tempo editing designed for social engagement.</p>
+                        </div>
+                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow w-full text-center">Enquire</a>
+                    </div>
                     
-                    <!-- Drone Photography -->
-                    <div class="glass-card reveal">
-                        <div class="service-tag">Production</div>
-                        <h4 class="text-xl font-bold mb-1 text-white">Drone Photography</h4>
-                        <p class="text-gold text-xs italic mb-4">"Ascend above the competition."</p>
-                        <p class="text-sm text-white/70 leading-relaxed">We deliver high-altitude perspectives that showcase the true scale of your enterprise assets.</p>
+                    <div class="glass-card reveal flex flex-col h-full border-white/10">
+                        <div class="flex-grow mb-8">
+                            <div class="service-tag">Engineering</div>
+                            <i data-lucide="cpu" class="mb-4 text-cyan-400 w-8 h-8"></i>
+                            <h4 class="text-xl font-bold mb-3 text-white">Quadcopter R&D</h4>
+                            <p class="text-sm text-white/50">Autonomous flight systems and custom drone building.</p>
+                        </div>
+                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow w-full text-center">Enquire</a>
                     </div>
 
-                    <!-- Videography -->
-                    <div class="glass-card reveal">
-                        <div class="service-tag">Motion</div>
-                        <h4 class="text-xl font-bold mb-1 text-white">Videography</h4>
-                        <p class="text-gold text-xs italic mb-4">"Visual storytelling engineered to convert."</p>
-                        <p class="text-sm text-white/70 leading-relaxed">We capture motion that moves the needle on your brand's market valuation.</p>
+                    <div class="glass-card reveal flex flex-col h-full border-white/10">
+                        <div class="flex-grow mb-8">
+                            <div class="service-tag">Acoustics</div>
+                            <i data-lucide="mic-2" class="mb-4 text-cyan-400 w-8 h-8"></i>
+                            <h4 class="text-xl font-bold mb-3 text-white">Audio Production</h4>
+                            <p class="text-sm text-white/50">Pristine sound engineering for digital media presence.</p>
+                        </div>
+                        <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow w-full text-center">Enquire</a>
                     </div>
-
-                    <!-- Video Editing -->
-                    <div class="glass-card reveal">
-                        <div class="service-tag">Refinement</div>
-                        <h4 class="text-xl font-bold mb-1 text-white">Video Editing</h4>
-                        <p class="text-gold text-xs italic mb-4">"The art of precision."</p>
-                        <p class="text-sm text-white/70 leading-relaxed">We refine raw data into cinematic narratives, ensuring every frame serves a strategic business purpose.</p>
-                    </div>
-
-                    <!-- Cinematography -->
-                    <div class="glass-card reveal">
-                        <div class="service-tag">Visuals</div>
-                        <h4 class="text-xl font-bold mb-1 text-white">Cinematography</h4>
-                        <p class="text-gold text-xs italic mb-4">"Bespoke visual excellence."</p>
-                        <p class="text-sm text-white/70 leading-relaxed">Lighting, composition, and direction designed to place your brand in the premium category.</p>
-                    </div>
-
-                    <!-- Quadcopter R&D -->
-                    <div class="glass-card reveal">
-                        <div class="service-tag">Engineering</div>
-                        <h4 class="text-xl font-bold mb-1 text-white">Quadcopter R&D</h4>
-                        <p class="text-gold text-xs italic mb-4">"Technical engineering at its peak."</p>
-                        <p class="text-sm text-white/70 leading-relaxed">Researching ArduPilot systems to redefine what's possible in autonomous flight.</p>
-                    </div>
-
-                    <!-- Audio Production -->
-                    <div class="glass-card reveal">
-                        <div class="service-tag">Acoustics</div>
-                        <h4 class="text-xl font-bold mb-1 text-white">Audio Production</h4>
-                        <p class="text-gold text-xs italic mb-4">"Soundscapes that command attention."</p>
-                        <p class="text-sm text-white/70 leading-relaxed">Precise audio engineering for commercials, podcasts, and corporate identity.</p>
-                    </div>
-
                 </div>
             </div>
         </section>
@@ -329,82 +435,108 @@
         <!-- DIRECTOR -->
         <section id="director">
             <div class="max-w-6xl mx-auto w-full px-4 reveal">
-                <div class="glass-card border-gold/30 bg-black/80">
-                    <div class="grid lg:grid-cols-2 items-center gap-12">
-                        <div>
-                            <span class="text-gold font-bold tracking-widest text-[10px] mb-8 uppercase block">The Architect</span>
-                            <h2 class="heading-font text-4xl md:text-6xl font-black mb-8 text-white">SANJAY<br><span class="text-gradient-gold">KATHULA</span></h2>
-                            <div class="space-y-4 mb-10">
-                                <p class="text-lg text-white/90 font-bold">MS Computer Science</p>
-                                <p class="text-white/70 break-all">sanjaykathulamusic@gmail.com</p>
-                                <p class="text-white/70">603-233-0590</p>
+                <div class="glass-card border-gold/30 bg-[#050508]/80 rounded-[3rem] overflow-hidden p-0">
+                    <div class="grid lg:grid-cols-2">
+                        <div class="p-10 lg:p-20">
+                            <span class="text-gold font-bold tracking-[0.4em] text-[10px] mb-8 uppercase block">The Architect</span>
+                            <h2 class="heading-font text-4xl lg:text-6xl font-black mb-8 leading-tight text-white">SANJAY<br><span class="text-gradient-gold">KATHULA</span></h2>
+                            <div class="space-y-6 mb-12">
+                                <div class="flex items-center gap-4 text-sm text-white/70">
+                                    <i data-lucide="graduation-cap" class="w-4 text-gold"></i>
+                                    <span>MS Computer Science</span>
+                                </div>
+                                <div class="flex items-center gap-4 text-sm text-white/70">
+                                    <i data-lucide="mail" class="w-4 text-gold"></i>
+                                    <span class="break-all">sanjaykathulamusic@gmail.com</span>
+                                </div>
                             </div>
-                            <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold text-black">Contact Architect</a>
+                            <a href="mailto:sanjaykathulamusic@gmail.com" class="btn-glow btn-gold">Contact Architect</a>
                         </div>
-                        <div class="text-center p-8 bg-white/5 rounded-3xl">
-                            <i data-lucide="quote" class="w-12 h-12 mx-auto mb-6 text-gold"></i>
-                            <p class="text-xl md:text-2xl italic font-light text-white leading-relaxed">
-                                "We don't sell websites. We build the infrastructure for digital dominance."
-                            </p>
+                        <div class="bg-black/80 p-12 flex items-center justify-center text-center">
+                            <div>
+                                <i data-lucide="quote" class="w-10 h-10 text-gold mx-auto mb-8 opacity-30"></i>
+                                <p class="text-xl italic font-light text-white leading-relaxed">
+                                    "Your brand isn't just a website. It's a digital infrastructure built for total market dominance."
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         
-        <footer class="py-12 text-center border-t border-white/10">
-            <p class="text-white/40 text-[10px] font-medium tracking-widest uppercase px-4">© 2026 Mighty Teck LLC. All Rights Reserved.</p>
+        <footer class="py-12 text-center border-t border-white/5">
+            <p class="text-white/30 text-[9px] font-black tracking-[0.5em] uppercase">© 2026 Mighty Teck LLC.</p>
         </footer>
-
     </div>
 
     <script>
         lucide.createIcons();
 
-        // --- 3D ENGINE (ORIGINAL RESTORED) ---
+        // 3D Engine
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 15000);
+        scene.fog = new THREE.FogExp2(0x010103, 0.00018);
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 20000);
         const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('global-canvas'), antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
         const mainGroup = new THREE.Group();
         scene.add(mainGroup);
-
         const loader = new THREE.TextureLoader();
         let mouseX = 0, mouseY = 0;
 
-        const earthRadius = 150;
-        const earthGeo = new THREE.SphereGeometry(earthRadius, 64, 64);
+        // Earth - Enhanced Brightness
+        const earthGeo = new THREE.SphereGeometry(150, 64, 64);
         const earthMat = new THREE.MeshStandardMaterial({
             map: loader.load('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg'),
-            roughness: 0.8, metalness: 0.1,
+            roughness: 0.5, 
+            metalness: 0.2,
+            emissive: new THREE.Color(0x2233ff), 
+            emissiveIntensity: 0.2
         });
         const earth = new THREE.Mesh(earthGeo, earthMat);
         mainGroup.add(earth);
 
-        const starCount = 75000;
+        // Dense Stars
+        const starCount = 250000;
         const starGeo = new THREE.BufferGeometry();
         const starPos = new Float32Array(starCount * 3);
+        const starColors = new Float32Array(starCount * 3);
+        const c1 = new THREE.Color(0xffffff);
+        const c2 = new THREE.Color(0xd4af37);
         for(let i=0; i<starCount; i++) {
-            starPos[i*3] = (Math.random() - 0.5) * 8000;
-            starPos[i*3+1] = (Math.random() - 0.5) * 8000;
-            starPos[i*3+2] = (Math.random() - 0.5) * 8000;
+            starPos[i*3] = (Math.random() - 0.5) * 14000;
+            starPos[i*3+1] = (Math.random() - 0.5) * 14000;
+            starPos[i*3+2] = (Math.random() - 0.5) * 14000;
+            const mix = Math.random() > 0.9 ? c2 : c1;
+            starColors[i*3] = mix.r; starColors[i*3+1] = mix.g; starColors[i*3+2] = mix.b;
         }
         starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-        const starMat = new THREE.PointsMaterial({ size: 3, color: 0xffffff, transparent: true, opacity: 0.8 });
+        starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+        const starMat = new THREE.PointsMaterial({ size: 3, vertexColors: true, transparent: true, blending: THREE.AdditiveBlending });
         const stars = new THREE.Points(starGeo, starMat);
         scene.add(stars);
 
-        const sunLight = new THREE.PointLight(0xffffff, 4, 8000);
-        sunLight.position.set(1000, 1000, 1500);
+        // Brighter Lighting
+        const sunLight = new THREE.DirectionalLight(0xffffff, 3);
+        sunLight.position.set(500, 500, 1000);
         scene.add(sunLight);
-        scene.add(new THREE.AmbientLight(0x222233, 0.6));
+        
+        const fillLight = new THREE.PointLight(0x00f0ff, 1.5, 5000);
+        fillLight.position.set(-1000, 0, 1000);
+        scene.add(fillLight);
+        
+        scene.add(new THREE.AmbientLight(0xffffff, 0.4)); 
 
-        // ORIGINAL CAMERA POSITION
-        camera.position.set(0, 0, 7000);
+        camera.position.set(0, 0, 7500);
 
-        // --- GSAP TIMELINE (ORIGINAL RESTORED) ---
+        window.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) - 0.5;
+            mouseY = (e.clientY / window.innerHeight) - 0.5;
+        });
+
+        // GSAP Flow
         gsap.registerPlugin(ScrollTrigger);
 
         const introTl = gsap.timeline({
@@ -412,55 +544,59 @@
                 trigger: "#intro-void",
                 start: "top top",
                 end: "bottom top",
-                scrub: 3
+                scrub: 1.2,
+                onUpdate: (self) => {
+                    camera.fov = 45 + (self.progress * 8);
+                    camera.updateProjectionMatrix();
+                }
             }
         });
 
-        introTl.to(".intro-text", { opacity: 1, y: 0, duration: 2, stagger: 0.5 }, 0)
-               .to(".intro-text", { opacity: 0, y: -100, duration: 2, stagger: 0.4 }, 5)
-               .to(camera.position, { z: 50, duration: 12 }, 0) // ORIGINAL ZOOM VALUE
-               .to(earth.rotation, { y: Math.PI * 1.5, x: 0.5, duration: 12 }, 0);
+        // Intro Animations
+        introTl.to("#initial-scroll-indicator", { opacity: 1, duration: 0.5 }, 0.1);
+        introTl.to(".intro-text", { opacity: 1, y: 0, filter: "blur(0px)", duration: 1.5 }, 0.2);
+        
+        // Fading Away (Exit)
+        introTl.to(".intro-text", { opacity: 0, scale: 0.9, filter: "blur(10px)", duration: 1.5 }, 6);
+        introTl.to("#initial-scroll-indicator", { opacity: 0, duration: 0.5 }, 6);
 
-        gsap.set("#hero-content", { opacity: 0, y: 50 });
+        introTl.to(camera.position, { z: 40, duration: 12, ease: "power1.inOut" }, 0)
+               .to(earth.rotation, { y: Math.PI * 1.8, duration: 12 }, 0);
+
+        // Transition Layer
+        introTl.to("#transition-screen", { autoAlpha: 1, duration: 1.5 }, 9.5)
+               .to("#loader-bar", { width: "100%", duration: 3 }, 10.5)
+               .to("#transition-screen", { autoAlpha: 0, duration: 1.5 }, 14);
+
+        introTl.to("#main-content", { autoAlpha: 1, duration: 1.5 }, 14.5);
+
         ScrollTrigger.create({
             trigger: "#intro-void",
             start: "98% top", 
-            onEnter: () => gsap.to("#hero-content", { opacity: 1, y: 0, duration: 2, ease: "expo.out" }),
-            onLeaveBack: () => gsap.to("#hero-content", { opacity: 0, y: 50, duration: 1 })
+            onEnter: () => document.getElementById('main-content').style.pointerEvents = 'auto',
+            onLeaveBack: () => document.getElementById('main-content').style.pointerEvents = 'none'
         });
 
         document.querySelectorAll('.reveal').forEach(el => {
-            gsap.from(el, {
-                opacity: 0, y: 40, duration: 1.2,
-                scrollTrigger: { trigger: el, start: "top 90%" }
-            });
+            gsap.from(el, { opacity: 0, y: 40, duration: 1.2, scrollTrigger: { trigger: el, start: "top 90%" } });
         });
 
         function animate() {
             requestAnimationFrame(animate);
-            earth.rotation.y += 0.0006;
-            
-            const targetX = mouseX * 50;
-            const targetY = -mouseY * 50;
-            camera.position.x += (targetX - camera.position.x) * 0.02;
-            camera.position.y += (targetY - camera.position.y) * 0.02;
+            earth.rotation.y += 0.0004;
+            stars.rotation.y += 0.00003;
+            camera.position.x += (mouseX * 40 - camera.position.x) * 0.02;
+            camera.position.y += (-mouseY * 40 - camera.position.y) * 0.02;
             camera.lookAt(0, 0, 0);
-            
             renderer.render(scene, camera);
         }
         animate();
-
-        window.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth) - 0.5;
-            mouseY = (e.clientY / window.innerHeight) - 0.5;
-        });
 
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth/window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
-
     </script>
 </body>
 </html>
