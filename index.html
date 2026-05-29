@@ -620,8 +620,9 @@
                 <h3 class="text-white heading-font text-xl">YOUR <span class="text-gradient-gold">CART</span></h3>
                 <button onclick="toggleCart()" class="text-white/50 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
             </div>
-            <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
-                <!-- Cart items injected here via JS -->
+            <div id="cart-items" class="flex-1 overflow-y-auto p-6">
+                <!-- Cart items injected here safely via JS -->
+                <div id="cart-items-wrapper" class="space-y-4"></div>
                 <div class="text-center text-white/30 text-sm mt-10" id="empty-cart-msg">Your digital arsenal is empty.</div>
             </div>
             <div class="p-6 border-t border-white/10 bg-black/30">
@@ -875,7 +876,17 @@
         }
 
         function addToCart(id, name, price) {
-            cart.push({ id, name, price, uid: Date.now() });
+            // Check if item already exists to stack quantities
+            const existingItem = cart.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                // Generate a robust unique ID string to guarantee perfect deletion
+                const uniqueId = id + '_' + Math.random().toString(36).substr(2, 9);
+                cart.push({ id, name, price, quantity: 1, uid: uniqueId });
+            }
+            
             updateCartUI();
             showToast(`${name} added to cart`, 'success', id);
         }
@@ -883,6 +894,18 @@
         function removeFromCart(uid) {
             cart = cart.filter(item => item.uid !== uid);
             updateCartUI();
+        }
+
+        function changeQuantity(uid, delta) {
+            const item = cart.find(i => i.uid === uid);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    removeFromCart(uid); // Auto-remove if quantity hits 0
+                } else {
+                    updateCartUI();
+                }
+            }
         }
 
         function updateCartColor() {
@@ -915,17 +938,17 @@
         }
 
         function updateCartUI() {
-            const count = cart.length;
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0); // Count total quantity
             const badge = document.getElementById('cart-badge');
             const floatBtn = document.getElementById('floating-cart-btn');
-            const itemsContainer = document.getElementById('cart-items');
+            const itemsWrapper = document.getElementById('cart-items-wrapper');
             const totalEl = document.getElementById('cart-total');
             const checkoutBtn = document.getElementById('checkout-btn');
             const emptyMsg = document.getElementById('empty-cart-msg');
 
             // Update badge & visibility
-            badge.textContent = count;
-            if (count > 0) {
+            badge.textContent = totalItems;
+            if (totalItems > 0) {
                 floatBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-10');
                 emptyMsg.style.display = 'none';
                 checkoutBtn.disabled = false;
@@ -937,28 +960,35 @@
                 if(isCartOpen) toggleCart(); // Auto close if empty
             }
 
-            // Calculate total
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            // Calculate total price based on quantities
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             totalEl.textContent = `$${total}`;
             document.getElementById('checkout-pay-amt').textContent = `$${total}`;
 
-            // Render items
-            itemsContainer.innerHTML = '';
-            if (count === 0) itemsContainer.appendChild(emptyMsg);
+            // Safely clear only the wrapper to prevent breaking DOM references
+            itemsWrapper.innerHTML = '';
 
             cart.forEach(item => {
                 const div = document.createElement('div');
-                div.className = 'glass-card p-4 flex justify-between items-center border-white/5';
+                div.className = 'glass-card p-5 flex flex-col gap-3 border-white/5 relative group';
                 div.innerHTML = `
-                    <div>
-                        <h5 class="text-white font-bold text-sm">${item.name}</h5>
-                        <div class="text-gold font-black mt-1">$${item.price}</div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h5 class="text-white font-bold text-sm pr-10 leading-tight">${item.name}</h5>
+                            <div class="text-gold font-black mt-1">$${item.price * item.quantity}</div>
+                        </div>
+                        <button onclick="removeFromCart('${item.uid}')" class="text-red-400 hover:text-red-300 p-2 bg-red-400/10 rounded-full transition-colors absolute top-4 right-4" title="Remove Item">
+                            <i data-lucide="trash-2" class="w-4 h-4 pointer-events-none"></i>
+                        </button>
                     </div>
-                    <button onclick="removeFromCart(${item.uid})" class="text-red-400 hover:text-red-300 p-2 bg-red-400/10 rounded-full transition-colors">
-                        <i data-lucide="trash-2" class="w-4 h-4"></i>
-                    </button>
+                    
+                    <div class="flex items-center gap-4 bg-white/5 w-fit rounded-full p-1 border border-white/10 mt-2">
+                        <button onclick="changeQuantity('${item.uid}', -1)" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-colors"><i data-lucide="minus" class="w-3 h-3 pointer-events-none"></i></button>
+                        <span class="text-xs font-bold text-white w-4 text-center select-none">${item.quantity}</span>
+                        <button onclick="changeQuantity('${item.uid}', 1)" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-colors"><i data-lucide="plus" class="w-3 h-3 pointer-events-none"></i></button>
+                    </div>
                 `;
-                itemsContainer.appendChild(div);
+                itemsWrapper.appendChild(div);
             });
             lucide.createIcons();
         }
