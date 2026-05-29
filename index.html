@@ -95,7 +95,6 @@
             transform: translateY(-8px);
         }
 
-        /* Specific Hover Glows for Pricing Cards */
         .pricing-card.card-blue:hover { border-color: var(--cyan); box-shadow: 0 20px 40px rgba(0,240,255,0.15); }
         .pricing-card.card-amethyst:hover { border-color: #9d4edd; box-shadow: 0 20px 40px rgba(157,78,221,0.15); }
         .pricing-card.card-gold:hover { border-color: var(--gold); box-shadow: 0 20px 40px rgba(212,175,55,0.2); }
@@ -150,28 +149,6 @@
         .tag-gold { background: rgba(212,175,55,0.1); color: var(--gold); border: 1px solid rgba(212,175,55,0.3); }
         .tag-diamond { background: rgba(255,255,255,0.1); color: #ffffff; border: 1px solid rgba(255,255,255,0.3); }
 
-        .payment-methods {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 1.5rem;
-            opacity: 0.6;
-            justify-content: center;
-        }
-
-        .service-tag {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--cyan);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 9px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: inline-block;
-            margin-bottom: 1rem;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-        }
-
         .content-layer {
             position: relative;
             z-index: 10;
@@ -189,12 +166,7 @@
         #loader-bar {
             box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
         }
-        
-        .stat-glow {
-            text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
-        }
 
-        /* NEW BANNER ANIMATIONS */
         @keyframes flutter-banner {
             0% { transform: perspective(800px) rotateY(0deg) skewY(0deg); }
             33% { transform: perspective(800px) rotateY(-6deg) skewY(0.5deg); }
@@ -228,41 +200,6 @@
             animation: flutter-rope 3s infinite ease-in-out;
             transform-origin: right center;
         }
-
-        /* NEW CART & CHECKOUT STYLES */
-        .toast-notification {
-            position: fixed;
-            bottom: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid var(--cyan);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 999px;
-            backdrop-filter: blur(10px);
-            z-index: 9999;
-            transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .toast-notification.show { bottom: 2rem; }
-        
-        .custom-input {
-            width: 100%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 0.5rem;
-            padding: 0.75rem 1rem;
-            color: white;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        .custom-input:focus {
-            border-color: var(--cyan);
-        }
     </style>
 </head>
 <body class="bg-[#010103]">
@@ -272,7 +209,6 @@
     <!-- TRANSITION SCREEN -->
     <div id="transition-screen" class="fixed inset-0 z-[60] bg-[#010103] flex flex-col items-center justify-center opacity-0 invisible overflow-hidden">
         
-        <!-- New Plane Animation -->
         <div id="plane-wrapper" class="absolute top-[8%] md:top-[12%] left-0 w-full pointer-events-none">
             <div id="plane-banner" class="flex items-center w-max">
                 <div class="banner-tail border-t border-b border-r border-cyan-400/50 text-white text-[10px] sm:text-xs font-black tracking-[0.2em] uppercase pl-8 pr-5 py-3 sm:py-4 rounded-r-sm shadow-[0_0_15px_rgba(0,240,255,0.3)] flex items-center h-10 sm:h-12">
@@ -370,7 +306,7 @@
             </div>
         </section>
 
-        <!-- NEW: WHY A WEBSITE? -->
+        <!-- WHY A WEBSITE? -->
         <section id="digital-catalyst" class="bg-white/[0.01]">
             <div class="max-w-7xl mx-auto w-full px-4 py-20">
                 <div class="grid lg:grid-cols-2 gap-20 items-center">
@@ -423,7 +359,7 @@
             </div>
         </section>
 
-        <!-- NEW: WHY A MOBILE APP? -->
+        <!-- WHY A MOBILE APP? -->
         <section id="mobile-catalyst" class="bg-[#050508]/40 border-t border-white/5">
             <div class="max-w-7xl mx-auto w-full px-4 py-20">
                 <div class="grid lg:grid-cols-2 gap-20 items-center">
@@ -488,7 +424,7 @@
                             </ul>
                         </div>
                         <div>
-                            <button onclick="addToCart('pkg_web', 'Website Only', 499)" class="btn-glow w-full text-center border-cyan-400 hover:bg-cyan-400/20">Add to Cart</button>
+                            <a href="https://buy.stripe.com/7sYaEWcsqdTPb1324m1ck01" target="_blank" rel="noopener noreferrer" class="btn-glow w-full text-center border-cyan-400 hover:bg-cyan-400/20 block">Secure Checkout</a>
                         </div>
                     </div>
                     
@@ -505,7 +441,7 @@
                             </ul>
                         </div>
                         <div>
-                            <button onclick="addToCart('pkg_app', 'Mobile App Only', 499)" class="btn-glow w-full text-center border-[#9d4edd] text-white hover:bg-[#9d4edd]/20">Add to Cart</button>
+                            <a href="https://buy.stripe.com/9B6aEW1NMcPLfhj5gy1ck02" target="_blank" rel="noopener noreferrer" class="btn-glow w-full text-center border-[#9d4edd] text-white hover:bg-[#9d4edd]/20 block">Secure Checkout</a>
                         </div>
                     </div>
 
@@ -527,7 +463,7 @@
                             </ul>
                         </div>
                         <div>
-                            <button onclick="addToCart('pkg_combo', 'Website & Mobile App Combo', 699)" class="btn-glow btn-gold w-full text-center">Add to Cart</button>
+                            <a href="https://buy.stripe.com/5kQ4gy8ca6rnfhj7oG1ck03" target="_blank" rel="noopener noreferrer" class="btn-glow btn-gold w-full text-center block">Secure Checkout</a>
                         </div>
                     </div>
                     
@@ -548,7 +484,7 @@
                             </ul>
                         </div>
                         <div>
-                            <button onclick="addToCart('pkg_premium', 'Premium Package', 999)" class="btn-glow w-full text-center border-white text-white hover:bg-white/20">Add to Cart</button>
+                            <a href="https://buy.stripe.com/4gM14m7866rnc575gy1ck04" target="_blank" rel="noopener noreferrer" class="btn-glow w-full text-center border-white text-white hover:bg-white/20 block">Secure Checkout</a>
                         </div>
                     </div>
                 </div>
@@ -601,118 +537,12 @@
             <p class="text-white/30 text-[9px] font-black tracking-[0.5em] uppercase">© 2026 Mighty Teck LLC.</p>
         </footer>
 
-        <!-- CUSTOM TOAST NOTIFICATIONS -->
-        <div id="toast" class="toast-notification">
-            <i data-lucide="info" class="w-5 h-5"></i>
-            <span id="toast-msg">Action successful</span>
-        </div>
-
-        <!-- FLOATING CART BUTTON -->
-        <button id="floating-cart-btn" onclick="toggleCart()" class="fixed bottom-6 right-6 z-40 w-16 h-16 rounded-full bg-gold flex items-center justify-center text-black shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all hover:scale-110 opacity-0 pointer-events-none translate-y-10">
-            <i data-lucide="shopping-cart" class="w-6 h-6"></i>
-            <span id="cart-badge" class="absolute -top-1 -right-1 bg-cyan-400 text-black text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center border-2 border-[#010103]">0</span>
-        </button>
-
-        <!-- CART SLIDE-OVER MODAL -->
-        <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300" onclick="toggleCart()"></div>
-        <div id="cart-panel" class="fixed top-0 right-0 h-full w-full max-w-md bg-[#050508] border-l border-white/10 z-50 transform translate-x-full transition-transform duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] flex flex-col">
-            <div class="p-6 border-b border-white/10 flex justify-between items-center">
-                <h3 class="text-white heading-font text-xl">YOUR <span class="text-gradient-gold">CART</span></h3>
-                <button onclick="toggleCart()" class="text-white/50 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
-            </div>
-            <div id="cart-items" class="flex-1 overflow-y-auto p-6">
-                <!-- Cart items injected here safely via JS -->
-                <div id="cart-items-wrapper" class="space-y-4"></div>
-                <div class="text-center text-white/30 text-sm mt-10" id="empty-cart-msg">Your digital arsenal is empty.</div>
-            </div>
-            <div class="p-6 border-t border-white/10 bg-black/30">
-                <div class="flex justify-between items-center mb-6">
-                    <span class="text-white/70 uppercase tracking-widest text-xs font-bold">Total Investment</span>
-                    <span id="cart-total" class="text-white text-2xl font-black heading-font">$0</span>
-                </div>
-                <button onclick="openCheckout()" id="checkout-btn" class="btn-glow btn-gold w-full text-center text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed" disabled>Proceed to Checkout</button>
-            </div>
-        </div>
-
-        <!-- CHECKOUT MODAL -->
-        <div id="checkout-modal" class="fixed inset-0 z-[60] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4">
-            <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeCheckout()"></div>
-            <div class="glass-card relative z-10 w-full max-w-lg border-cyan-400/30 p-8 shadow-[0_0_50px_rgba(0,240,255,0.1)]">
-                <button onclick="closeCheckout()" class="absolute top-6 right-6 text-white/50 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
-                
-                <div class="mb-8">
-                    <h3 class="heading-font text-2xl text-white mb-2">SECURE <span class="text-cyan-400">CHECKOUT</span></h3>
-                    <p class="text-white/50 text-sm">Powered by Mighty Teck Gateway</p>
-                </div>
-
-                <form id="checkout-form" class="space-y-4" onsubmit="processPayment(event)">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-white/70 text-[10px] uppercase tracking-wider mb-2">First Name</label>
-                            <input type="text" required class="custom-input" placeholder="John">
-                        </div>
-                        <div>
-                            <label class="block text-white/70 text-[10px] uppercase tracking-wider mb-2">Last Name</label>
-                            <input type="text" required class="custom-input" placeholder="Doe">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-white/70 text-[10px] uppercase tracking-wider mb-2">Email Address</label>
-                        <input type="email" required class="custom-input" placeholder="john@example.com">
-                    </div>
-                    
-                    <div class="pt-4 border-t border-white/10 mt-4">
-                        <label class="block text-white/70 text-[10px] uppercase tracking-wider mb-2">Payment Method</label>
-                        <div class="grid grid-cols-2 gap-2">
-                            <label class="cursor-pointer">
-                                <input type="radio" name="payment_method" value="card" checked class="peer sr-only" onchange="togglePaymentMethod()">
-                                <div class="text-center p-2 rounded border border-white/10 peer-checked:border-cyan-400 peer-checked:bg-cyan-400/10 text-xs text-white/70 peer-checked:text-white transition-all">Credit/Debit</div>
-                            </label>
-                            <label class="cursor-pointer">
-                                <input type="radio" name="payment_method" value="zelle" class="peer sr-only" onchange="togglePaymentMethod()">
-                                <div class="text-center p-2 rounded border border-white/10 peer-checked:border-cyan-400 peer-checked:bg-cyan-400/10 text-xs text-white/70 peer-checked:text-white transition-all">Zelle</div>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div id="method-card">
-                        <div class="pt-4 mt-2">
-                            <label class="block text-white/70 text-[10px] uppercase tracking-wider mb-2">Card Details</label>
-                            <div class="relative">
-                                <input type="text" required class="custom-input pl-10" placeholder="0000 0000 0000 0000" pattern="\d{16}" title="16 digit card number">
-                                <i data-lucide="credit-card" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50"></i>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4 mt-4">
-                            <div>
-                                <input type="text" required class="custom-input" placeholder="MM/YY" pattern="\d\d/\d\d" title="Format: MM/YY">
-                            </div>
-                            <div>
-                                <input type="text" required class="custom-input" placeholder="CVC" pattern="\d{3,4}" title="3 or 4 digit CVC">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div id="method-zelle" class="hidden py-4 text-center">
-                        <i data-lucide="smartphone" class="w-8 h-8 text-cyan-400 mx-auto mb-2"></i>
-                        <p class="text-white/70 text-sm mb-2">Send payment via Zelle to:</p>
-                        <p class="text-xl font-bold text-cyan-400 tracking-wider">6032330590</p>
-                        <p class="text-xs text-white/40 mt-2">Please include your email address in the Zelle memo.</p>
-                    </div>
-
-                    <button type="submit" id="pay-now-btn" class="btn-glow bg-cyan-400 text-black border-none hover:bg-cyan-300 w-full text-center mt-6 py-4 flex items-center justify-center gap-2">
-                        <i data-lucide="lock" class="w-4 h-4"></i> Complete Order <span id="checkout-pay-amt">$0</span>
-                    </button>
-                </form>
-            </div>
-        </div>
-
     </div>
 
     <script>
         lucide.createIcons();
 
-        // 3D Engine
+        // 3D Engine Setup
         const scene = new THREE.Scene();
         scene.fog = new THREE.FogExp2(0x010103, 0.00018);
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 20000);
@@ -725,7 +555,7 @@
         const loader = new THREE.TextureLoader();
         let mouseX = 0, mouseY = 0;
 
-        // Earth - Enhanced Brightness
+        // Earth Configuration
         const earthGeo = new THREE.SphereGeometry(150, 64, 64);
         const earthMat = new THREE.MeshStandardMaterial({
             map: loader.load('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg'),
@@ -737,7 +567,7 @@
         const earth = new THREE.Mesh(earthGeo, earthMat);
         mainGroup.add(earth);
 
-        // Dense Stars
+        // Dense Starfield Generation
         const starCount = 250000;
         const starGeo = new THREE.BufferGeometry();
         const starPos = new Float32Array(starCount * 3);
@@ -757,7 +587,7 @@
         const stars = new THREE.Points(starGeo, starMat);
         scene.add(stars);
 
-        // Brighter Lighting
+        // Lighting Rig
         const sunLight = new THREE.DirectionalLight(0xffffff, 3);
         sunLight.position.set(500, 500, 1000);
         scene.add(sunLight);
@@ -775,7 +605,6 @@
             mouseY = (e.clientY / window.innerHeight) - 0.5;
         });
 
-        // GSAP Flow
         gsap.registerPlugin(ScrollTrigger);
 
         const introTl = gsap.timeline({
@@ -802,11 +631,11 @@
         introTl.to(camera.position, { z: 40, duration: 12, ease: "power1.inOut" }, 0)
                .to(earth.rotation, { y: Math.PI * 1.8, duration: 12 }, 0);
 
-        // Transition Layer
+        // Transition Layer Animations
         introTl.to("#transition-screen", { autoAlpha: 1, duration: 1.5 }, 9.5)
                .fromTo("#plane-banner", 
-                    { x: -500 }, // Starts fully off-screen left
-                    { x: "120vw", duration: 4.5, ease: "none" }, // Flies all the way past the right edge
+                    { x: -500 }, 
+                    { x: "120vw", duration: 4.5, ease: "none" }, 
                     9.5)
                .to("#loader-bar", { width: "100%", duration: 3 }, 10.5)
                .to("#transition-screen", { autoAlpha: 0, duration: 1.5 }, 14);
@@ -840,227 +669,6 @@
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
-
-        // --- CART & E-COMMERCE LOGIC ---
-        let cart = [];
-        let isCartOpen = false;
-        let toastTimeout; // Variable to keep track of the timer
-
-        function showToast(message, type = 'info', pkgId = null) {
-            const toast = document.getElementById('toast');
-            const msg = document.getElementById('toast-msg');
-            msg.textContent = message;
-            
-            // Match toast border to package color
-            if (pkgId === 'pkg_web') toast.style.borderColor = 'var(--cyan)';
-            else if (pkgId === 'pkg_app') toast.style.borderColor = '#9d4edd';
-            else if (pkgId === 'pkg_combo') toast.style.borderColor = 'var(--gold)';
-            else if (pkgId === 'pkg_premium') toast.style.borderColor = '#ffffff';
-            else if(type === 'success') toast.style.borderColor = 'var(--gold)';
-            else toast.style.borderColor = 'var(--cyan)';
-
-            // 1. Clear any existing timers from previous rapid taps
-            clearTimeout(toastTimeout);
-            
-            // 2. Briefly remove the class and force a browser reflow to ensure it resets properly
-            toast.classList.remove('show');
-            void toast.offsetWidth; 
-
-            // 3. Show the toast
-            toast.classList.add('show');
-            
-            // 4. Set a fresh timer that hides it after 3 seconds
-            toastTimeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        function addToCart(id, name, price) {
-            // Check if item already exists to stack quantities
-            const existingItem = cart.find(item => item.id === id);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                // Generate a robust unique ID string to guarantee perfect deletion
-                const uniqueId = id + '_' + Math.random().toString(36).substr(2, 9);
-                cart.push({ id, name, price, quantity: 1, uid: uniqueId });
-            }
-            
-            updateCartUI();
-            showToast(`${name} added to cart`, 'success', id);
-        }
-
-        function removeFromCart(uid) {
-            cart = cart.filter(item => item.uid !== uid);
-            updateCartUI();
-        }
-
-        function changeQuantity(uid, delta) {
-            const item = cart.find(i => i.uid === uid);
-            if (item) {
-                item.quantity += delta;
-                if (item.quantity <= 0) {
-                    removeFromCart(uid); // Auto-remove if quantity hits 0
-                } else {
-                    updateCartUI();
-                }
-            }
-        }
-
-        function updateCartColor() {
-            if(cart.length === 0) return;
-            const lastItem = cart[cart.length - 1]; // Get most recently added item
-            const btn = document.getElementById('floating-cart-btn');
-            const badge = document.getElementById('cart-badge');
-            
-            // Reset all color classes
-            const btnColors = ['bg-gold', 'bg-[#00f0ff]', 'bg-[#9d4edd]', 'bg-[#d4af37]', 'bg-white', 'text-black', 'text-white', 'shadow-[0_0_20px_rgba(212,175,55,0.4)]', 'shadow-[0_0_20px_rgba(0,240,255,0.4)]', 'shadow-[0_0_20px_rgba(157,78,221,0.4)]', 'shadow-[0_0_20px_rgba(255,255,255,0.4)]'];
-            const badgeColors = ['bg-cyan-400', 'bg-black', 'text-black', 'text-[#00f0ff]', 'text-[#9d4edd]', 'text-[#d4af37]', 'text-white'];
-            
-            btn.classList.remove(...btnColors);
-            badge.classList.remove(...badgeColors);
-
-            // Apply new dynamic colors based on the item
-            if(lastItem.id === 'pkg_web') {
-                btn.classList.add('bg-[#00f0ff]', 'text-black', 'shadow-[0_0_20px_rgba(0,240,255,0.4)]');
-                badge.classList.add('bg-black', 'text-[#00f0ff]');
-            } else if(lastItem.id === 'pkg_app') {
-                btn.classList.add('bg-[#9d4edd]', 'text-white', 'shadow-[0_0_20px_rgba(157,78,221,0.4)]');
-                badge.classList.add('bg-black', 'text-[#9d4edd]');
-            } else if(lastItem.id === 'pkg_combo') {
-                btn.classList.add('bg-[#d4af37]', 'text-black', 'shadow-[0_0_20px_rgba(212,175,55,0.4)]');
-                badge.classList.add('bg-black', 'text-[#d4af37]');
-            } else if(lastItem.id === 'pkg_premium') {
-                btn.classList.add('bg-white', 'text-black', 'shadow-[0_0_20px_rgba(255,255,255,0.4)]');
-                badge.classList.add('bg-black', 'text-white');
-            }
-        }
-
-        function updateCartUI() {
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0); // Count total quantity
-            const badge = document.getElementById('cart-badge');
-            const floatBtn = document.getElementById('floating-cart-btn');
-            const itemsWrapper = document.getElementById('cart-items-wrapper');
-            const totalEl = document.getElementById('cart-total');
-            const checkoutBtn = document.getElementById('checkout-btn');
-            const emptyMsg = document.getElementById('empty-cart-msg');
-
-            // Update badge & visibility
-            badge.textContent = totalItems;
-            if (totalItems > 0) {
-                floatBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-10');
-                emptyMsg.style.display = 'none';
-                checkoutBtn.disabled = false;
-                updateCartColor(); // Trigger the color change based on items!
-            } else {
-                floatBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-10');
-                emptyMsg.style.display = 'block';
-                checkoutBtn.disabled = true;
-                if(isCartOpen) toggleCart(); // Auto close if empty
-            }
-
-            // Calculate total price based on quantities
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            totalEl.textContent = `$${total}`;
-            document.getElementById('checkout-pay-amt').textContent = `$${total}`;
-
-            // Safely clear only the wrapper to prevent breaking DOM references
-            itemsWrapper.innerHTML = '';
-
-            cart.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'glass-card p-5 flex flex-col gap-3 border-white/5 relative group';
-                div.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h5 class="text-white font-bold text-sm pr-10 leading-tight">${item.name}</h5>
-                            <div class="text-gold font-black mt-1">$${item.price * item.quantity}</div>
-                        </div>
-                        <button onclick="removeFromCart('${item.uid}')" class="text-red-400 hover:text-red-300 p-2 bg-red-400/10 rounded-full transition-colors absolute top-4 right-4" title="Remove Item">
-                            <i data-lucide="trash-2" class="w-4 h-4 pointer-events-none"></i>
-                        </button>
-                    </div>
-                    
-                    <div class="flex items-center gap-4 bg-white/5 w-fit rounded-full p-1 border border-white/10 mt-2">
-                        <button onclick="changeQuantity('${item.uid}', -1)" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-colors"><i data-lucide="minus" class="w-3 h-3 pointer-events-none"></i></button>
-                        <span class="text-xs font-bold text-white w-4 text-center select-none">${item.quantity}</span>
-                        <button onclick="changeQuantity('${item.uid}', 1)" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 text-white/70 hover:text-white transition-colors"><i data-lucide="plus" class="w-3 h-3 pointer-events-none"></i></button>
-                    </div>
-                `;
-                itemsWrapper.appendChild(div);
-            });
-            lucide.createIcons();
-        }
-
-        function toggleCart() {
-            const panel = document.getElementById('cart-panel');
-            const overlay = document.getElementById('cart-overlay');
-            isCartOpen = !isCartOpen;
-            
-            if (isCartOpen) {
-                panel.classList.remove('translate-x-full');
-                overlay.classList.remove('opacity-0', 'pointer-events-none');
-            } else {
-                panel.classList.add('translate-x-full');
-                overlay.classList.add('opacity-0', 'pointer-events-none');
-            }
-        }
-
-        function openCheckout() {
-            if (cart.length === 0) return;
-            toggleCart(); // close cart
-            const modal = document.getElementById('checkout-modal');
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-        }
-
-        function closeCheckout() {
-            const modal = document.getElementById('checkout-modal');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-        }
-
-        function togglePaymentMethod() {
-            const method = document.querySelector('input[name="payment_method"]:checked').value;
-            const cardView = document.getElementById('method-card');
-            const zelleView = document.getElementById('method-zelle');
-            const cardInputs = cardView.querySelectorAll('input');
-
-            if (method === 'card') {
-                cardView.classList.remove('hidden');
-                zelleView.classList.add('hidden');
-                // Make card fields required again
-                cardInputs.forEach(input => input.setAttribute('required', 'true'));
-            } else if (method === 'zelle') {
-                cardView.classList.add('hidden');
-                zelleView.classList.remove('hidden');
-                // Remove required attribute so the form can submit
-                cardInputs.forEach(input => input.removeAttribute('required'));
-            }
-        }
-
-        function processPayment(e) {
-            e.preventDefault();
-            const btn = document.getElementById('pay-now-btn');
-            const originalText = btn.innerHTML;
-            
-            btn.disabled = true;
-            btn.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Processing...`;
-            lucide.createIcons();
-
-            // Simulate network request
-            setTimeout(() => {
-                btn.disabled = false;
-                btn.innerHTML = originalText;
-                closeCheckout();
-                
-                // Show success modal/toast
-                cart = [];
-                updateCartUI();
-                
-                showToast("Order Successful! Welcome to Mighty Teck.", 'success');
-                
-            }, 2000);
-        }
 
     </script>
 </body>
