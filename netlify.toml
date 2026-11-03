@@ -1,0 +1,6 @@
+# This is a static site (a single index.html that loads its libraries from CDNs),
+# so there is no npm build step. These settings override the Next.js-style
+# build command and ".next" publish directory configured in the Netlify UI.
+[build]
+  command = "echo 'Static site - no build step required'"
+  publish = "."
